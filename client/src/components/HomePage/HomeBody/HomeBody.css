@@ -1,0 +1,45 @@
+/* .home{
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  white-space: nowrap;
+   background-image: url('../../../images/ramen.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+
+} */
+
+/* .box{
+  width: 100px;
+  height: 600px;
+} */
+
+
+.section-1{
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  white-space: nowrap;
+   background-image: url('../../../images/ramen.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+  /* background-attachment: fixed; */
+
+}
+
+.section-2{
+  
+}
+ 
