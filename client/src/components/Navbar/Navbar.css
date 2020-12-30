@@ -133,6 +133,8 @@ li:first-child{
     margin-top: 5rem;
     top: -100%;
     /* width:99%; */
+    min-width: 100%;
+    max-width: 100%;
     /* width:100%; */
     opacity: 0.5;
     transition: all 0.5s ease;
@@ -149,8 +151,8 @@ li:first-child{
     /* background: rgb(148, 146, 145); */
     background: rgba(0,0,0,0.5);
     top: 0;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
     /* opacity: 1; */
     opacity: 1;
     transition: all 0.5s ease;
