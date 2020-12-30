@@ -50,7 +50,7 @@
 .nav-menu {
   display: grid;
   grid-template-columns: repeat(6, auto);
-  grid-gap: 15px;
+  grid-gap: 25px;
   list-style: none;
   text-align: center;
   /* width: 70vw; */
@@ -77,7 +77,7 @@ li:first-child{
 .nav-links {
   color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem ;
   letter-spacing: 0.1rem;
 }
 
@@ -132,10 +132,11 @@ li:first-child{
     /* flex-shrink: 1;  */
     margin-top: 5rem;
     top: -100%;
-    /* width:99%; */
-    box-sizing: border-box;
-    margin-left: 2.5rem;
     width:100%;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+   
     opacity: 0.5;
     transition: all 0.5s ease;
 
@@ -151,8 +152,9 @@ li:first-child{
     /* background: rgb(148, 146, 145); */
     background: rgba(0,0,0,0.5);
     top: 0;
-    /* justify-content: center;
-    align-items: center; */
+    justify-content: center;
+    align-items: center;
+    
     /* opacity: 1; */
     opacity: 1;
     transition: all 0.5s ease;
@@ -163,12 +165,14 @@ li:first-child{
 
   .nav-links {
     text-align: center;
-    /* padding: 2rem; */
-    width: 100%;
     display: table;
     font-weight: bold;
-    /* color:rgb(0, 0, 0); */
-    
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2.5rem;
+
+
   }
 
   .nav-links:hover {
@@ -177,6 +181,8 @@ li:first-child{
     background-color:white;
     border-radius: 0;
     color: black;
+    
+    width: 100%;
   }
 
   /* .navbar-logo {
@@ -233,6 +239,7 @@ li:first-child{
   text-decoration: none;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5em;
+  margin-right: 2.5rem;
 
 }
 
