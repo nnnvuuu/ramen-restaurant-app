@@ -189,6 +189,7 @@ li:first-child{
     box-sizing: border-box;
     width: 100%;
     /* margin-left: 2.5rem; */
+    padding-right: 2.5rem;
     margin-right: 2.5rem;
   }
 
