@@ -53,10 +53,11 @@
   grid-gap: 15px;
   list-style: none;
   text-align: center;
+  /* width: 70vw; */
   width: 70vw;
   justify-content: end;
-  margin-right: 2rem;
-  margin-left: auto;
+  margin-right: 2.5rem;
+  /* margin-left: auto; */
 }
 /* 
 li:first-child{
@@ -127,10 +128,11 @@ li:first-child{
      justify-content: center;
     align-items: center; 
     position: absolute;
-    height: auto;
+    /* height: auto; */
     flex-shrink: 1; 
     margin-top: 5rem;
     top: -100%;
+    /* width:99%; */
     width:100%;
     opacity: 0.5;
     transition: all 0.5s ease;
