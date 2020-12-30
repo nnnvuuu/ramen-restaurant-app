@@ -80,7 +80,8 @@ li:first-child{
   padding-bottom: 0.5rem ; */
   padding: 0.5rem;
   letter-spacing: 0.1rem;
-  
+  /* margin-right: 2.5rem; */
+
 }
 
 .nav-links:hover {
@@ -88,6 +89,7 @@ li:first-child{
   background-color: #1888ff;
   border-radius: 4px;
   transition: all 0.2s ease-out;
+ 
 }
 
 .fa-bars {
@@ -172,7 +174,8 @@ li:first-child{
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    /* margin-right: 2.5rem; */
+    padding-right: 2.5rem;
+  
      /* padding-top: 0.5rem ;
   padding-bottom: 0.5rem ; */
   /* padding: 0.5rem; */
@@ -185,7 +188,8 @@ li:first-child{
     background-color:white;
     border-radius: 0;
     color: black;
-    
+    margin-right: 2.5rem;
+    padding-left: 4.5rem;
     width: 100%;
   }
 
