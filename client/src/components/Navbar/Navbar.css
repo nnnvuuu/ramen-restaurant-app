@@ -178,8 +178,8 @@ li:first-child{
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    height: 10px;
     margin-right: 2.5rem;
+    height: 20%;
     /* margin-top: 1rem; */
     
     /* padding-right: 2.5rem; */
