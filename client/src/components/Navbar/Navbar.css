@@ -181,7 +181,7 @@ li:first-child{
     margin-right: 2.5rem;
    
 
-    margin-top: 2rem;
+    margin-top: 0.8rem;
     /* padding: 0.5rem; */
     
     /* padding-right: 2.5rem; */
@@ -255,6 +255,7 @@ li:first-child{
   padding: 0.5rem 1rem;
   margin-bottom: 0.5em;
   margin-right: 2.5rem;
+  margin-top: 0.8rem;
 
 }
 
