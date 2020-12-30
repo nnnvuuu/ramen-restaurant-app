@@ -179,8 +179,7 @@ li:first-child{
     justify-content: center;
     align-items: center;
     margin-right: 2.5rem;
-    height: 20%;
-    /* margin-top: 1rem; */
+ 
     
     /* padding-right: 2.5rem; */
 
@@ -242,7 +241,7 @@ li:first-child{
 .nav-item {
   display: flex;
   align-items: center;
-  /* width: 100%; */
+  width: 100%;
   justify-content: center;
 }
 
