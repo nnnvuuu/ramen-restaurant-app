@@ -1,0 +1,37 @@
+{
+  "name": "ramen-restaurant-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "install-server": "npm install",
+    "heroku-postbuild": "npm run install-client && npm run install-server && npm run build ",
+    "start": "cd server && node server.js",
+    "client": "cd client && npm start"
+  },
+  "engines": {
+    "node": "12.13.0",
+    "npm": "6.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nnnvuuu/ramen-restaurant-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nnnvuuu/ramen-restaurant-app/issues"
+  },
+  "homepage": "https://github.com/nnnvuuu/ramen-restaurant-app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.9",
+    "nodemon": "^2.0.6"
+  },
+  "proxy": "http://localhost:5000"
+}
