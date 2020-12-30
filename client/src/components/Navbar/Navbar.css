@@ -26,6 +26,7 @@
 .fa-cart-plus{
   font-size: 1.6rem;
    margin-left: 0.5rem;
+   padding-right: 0.5rem;
 }
 
 .fa-cart-plus-mobile{
@@ -71,6 +72,7 @@ li:first-child{
   align-items: center;
   width: 100%;
   justify-content: center;
+
 }
 
 .nav-links {
@@ -79,7 +81,7 @@ li:first-child{
   /* padding-top: 0.5rem ;
   padding-bottom: 0.5rem ; */
   padding: 0.5rem;
-
+  
   letter-spacing: 0.1rem;
   /* margin-right: 2.5rem; */
 
@@ -176,7 +178,10 @@ li:first-child{
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    height: 10px;
     margin-right: 2.5rem;
+    /* margin-top: 1rem; */
+    
     /* padding-right: 2.5rem; */
 
   }
