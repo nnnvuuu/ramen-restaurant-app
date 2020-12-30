@@ -177,7 +177,7 @@ li:first-child{
     justify-content: center;
     align-items: center;
     margin-right: 2.5rem;
-
+    /* padding-right: 2.5rem; */
 
   }
 
@@ -188,9 +188,11 @@ li:first-child{
     color: black;
     box-sizing: border-box;
     width: 100%;
+    justify-content: center;
+    align-items: center;
     /* margin-left: 2.5rem; */
-    padding-right: 2.5rem;
-    margin-right: 2.5rem;
+    /* padding-right: 2.5rem;
+    margin-right: 2.5rem; */
   }
 
   
