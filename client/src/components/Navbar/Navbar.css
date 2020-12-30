@@ -188,16 +188,11 @@ li:first-child{
     color: black;
     box-sizing: border-box;
     width: 100%;
+    margin-left: 2.5rem;
+    margin-right: 4.5rem;
   }
 
-  .nav-links:active{
-    background-color:white;
-    border-radius: 0;
-    color: black;
-    box-sizing: border-box;
-    width: 100%;
-    margin-left: 2.5rem;
-  }
+  
  
 
   .navbar-logo {
