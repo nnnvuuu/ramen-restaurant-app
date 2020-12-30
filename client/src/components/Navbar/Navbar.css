@@ -79,6 +79,7 @@ li:first-child{
   /* padding-top: 0.5rem ;
   padding-bottom: 0.5rem ; */
   padding: 0.5rem;
+
   letter-spacing: 0.1rem;
   /* margin-right: 2.5rem; */
 
@@ -89,7 +90,7 @@ li:first-child{
   background-color: #1888ff;
   border-radius: 4px;
   transition: all 0.2s ease-out;
- 
+
 }
 
 .fa-bars {
@@ -167,6 +168,7 @@ li:first-child{
 
 
 
+
   .nav-links  {
     text-align: center;
     display: table;
@@ -174,31 +176,28 @@ li:first-child{
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    padding-right: 2.5rem;
-  
-     /* padding-top: 0.5rem ;
-  padding-bottom: 0.5rem ; */
-  /* padding: 0.5rem; */
+    margin-right: 2.5rem;
+
 
   }
 
   .nav-links:hover {
-    /* background-color: #1888ff; */
-    /* background-color:white; */
+ 
     background-color:white;
     border-radius: 0;
     color: black;
-    margin-right: 2.5rem;
-    padding-left: 4.5rem;
+    box-sizing: border-box;
     width: 100%;
   }
 
-  /* .navbar-logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(25%, 50%);
-  } */
+  .nav-links.active{
+    background-color:white;
+    border-radius: 0;
+    color: black;
+    box-sizing: border-box;
+    width: 100%;
+  }
+ 
 
   .navbar-logo {
     position: absolute;
