@@ -33,9 +33,6 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   color: #fff;
   font-size: 100px;
   background-attachment: fixed;
@@ -43,7 +40,14 @@
 }
 
 .section-1:after{
-  display: flex;
+
+}
+
+.section-2{
+  
+}
+ 
+.section-3{
   content:"";
   position:fixed; /* stretch a fixed position to the whole screen */
   top:0;
@@ -51,17 +55,10 @@
   left:0;
   right:0;
   z-index:-1; /* needed to keep in the background */
-  background: url('../../../images/ramen.jpg'), center center;
+  background-image: url('../../../images/ramen.jpg');
+  background-position: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
 }
-
-
-.section-2{
-  
-}
- 
