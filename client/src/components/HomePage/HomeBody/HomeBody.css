@@ -40,10 +40,6 @@
 }
 
 .section-1:after{
-
-}
-
-.section-2{
   content:"";
   position:fixed; /* stretch a fixed position to the whole screen */
   height:100vh; /* fix for mobile browser address bar appearing disappearing */
@@ -55,7 +51,11 @@
   -o-background-size: cover;
   background-size: cover;
 }
- 
+
+.section-2{
+
+}
+  
 .section-3{
   content:"";
   position:fixed; /* stretch a fixed position to the whole screen */
