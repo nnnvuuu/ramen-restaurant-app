@@ -15,10 +15,10 @@
 
 } */
 
-/* .box{
+.box{
   width: 100px;
   height: 600px;
-} */
+}
 
 
 .section-1{
@@ -35,7 +35,7 @@
   background-repeat: no-repeat;
   color: #fff;
   font-size: 100px;
-  /* background-attachment: fixed; */
+  background-attachment: fixed;
 
 }
 
