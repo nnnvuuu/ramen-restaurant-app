@@ -36,7 +36,6 @@
   color: #fff;
   font-size: 100px;
   background-attachment: fixed;
-  z-index: 99;
 }
 
 /* .section-1:after{
@@ -44,17 +43,7 @@
 } */
 
 .section-2{
-  content:"";
-  z-index: 100;
-  bottom:0;
-  left:0;
-  right:0;
-  height:100vh; /* fix for mobile browser address bar appearing disappearing */
-  background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+
 }
   
 .section-3{
