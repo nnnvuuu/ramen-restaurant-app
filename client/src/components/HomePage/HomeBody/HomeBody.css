@@ -39,7 +39,11 @@
 
 }
 
-.section-1:after{
+/* .section-1:after{
+
+} */
+
+.section-2{
   content:"";
   position:fixed; /* stretch a fixed position to the whole screen */
   bottom:0;
@@ -52,10 +56,6 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-.section-2{
-
 }
   
 .section-3{
