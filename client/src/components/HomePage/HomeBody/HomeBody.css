@@ -1,19 +1,4 @@
-/* .home{
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-  white-space: nowrap;
-   background-image: url('../../../images/ramen.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
 
-} */
 
 .box{
   width: 100%;
@@ -34,30 +19,36 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #fff;
   font-size: 100px;
+
+  
+  
 }
 
-/* .section-1:after{
-
-} */
 
 .section-2{
-
+  background-color: aliceblue;
 }
   
+
 .section-3{
-  content:"";
-  position:fixed; /* stretch a fixed position to the whole screen */
-  top:0;
-  height:100vh; /* fix for mobile browser address bar appearing disappearing */
-  left:0;
-  right:0;
-  z-index:-1; /* needed to keep in the background */
-  background-image: url('../../../images/ramen.jpg');
-  background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background-color: pink;
 }
+  
+.section-4{
+  background-color: yellow;
+}
+  
+.section-5{
+  background-color: green;
+}
+  
+.section-6{
+  background-color: skyblue;
+}
+  
+
+.section-6{
+  background-color:grey;
+}
+  
