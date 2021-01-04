@@ -1,8 +1,55 @@
 import React from 'react';
 import './HomeBody.css';
 import RamenTitlePng from '../../../images/RAMEN-title.png';
-import {Grid,Box,Typography,Button,positions} from '@material-ui/core';
+import {Grid,Box,Typography,
+    Button,ThemeProvider, createMuiTheme,
+    responsiveFontSizes,withStyles} from '@material-ui/core'
 import Section2Png from '../../../images/section-2.jpg';
+import { color } from '@material-ui/system';
+import { wrap } from 'module';
+
+
+
+
+
+// const colorTheme = createMuiTheme({
+//     palette: {
+//       primary: { main: "#800000", contrastText: "#fff" },
+//       secondary: { main: "#03a9f4", contrastText: "#000" }
+//     // type: 'dark',
+//     },
+
+//   });
+
+const StyledButton = withStyles({
+    root: {
+
+    borderColor:'#800000',
+    color:'#800000',
+    opacity:0.5,
+    padding: '10px,30px',
+      '&:hover': {
+        background: "#800000",
+        color:"white",
+        opacity:0.7
+     },
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  })(Button);
+
+
+  const StyledTypography = withStyles({
+    root: {
+      color: '#8B4513',
+      opacity:0.5,
+    },
+  })(Typography);
+
+
+
+
 
 function HomeBody(props) {
   return (
@@ -16,31 +63,32 @@ function HomeBody(props) {
 
         <Grid container spacing={3} justify="center"
   alignItems="flex-start" className="section-2-container">
-
-          <Grid item lg={4} >
+     {/* <ThemeProvider theme={colorTheme}> */}
+          <Grid item xs={10} sm={6} md={4} lg={4} >
             <Box  mt={20}>
                 <Typography variant="h5" >
                     About the Resturant
                 </Typography>
-                <Typography variant="h4" >
-                   THIS IS THE PLACE WHERE YOU CAN GET THE BEST JAPANESE RAMEN EXPERIENCE EVER!
-                </Typography>
+                <StyledTypography variant="h3" >
+                   BEST RAMEN EXPERIENCE EVER!
+                </StyledTypography>
                 <hr className="section-2-left-hr"/>
-                <Typography variant="p">
-                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sem non sapien placerat iaculis et vel arcu. Suspendisse vel purus urna. Cras pellentesque congue blandit. Fusce ut orci nec arcu consequat condimentum. 
-                </Typography>
-                <br/>
+                <Box lineHeight={2}> 
+                 <Typography variant="p">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed sem non sapien placerat iaculis et vel arcu. Suspendisse vel purus urna. Cras pellentesque congue blandit. Fusce ut orci nec arcu consequat condimentum. 
+                 </Typography>
+                 </Box>
                 <Box mt={5}>
-                  <Button size="large" variant="contained" color="primary">
+                  <StyledButton size="large" variant="outlined">
                       READ MORE
-                  </Button>
+                  </StyledButton>
                 </Box>
              </Box>
           </Grid>
-         <Grid item lg ={1}/>
-          <Grid item lg={3}>
+         <Grid item sm={1} md={1} lg ={1}/>
+          <Grid item sm={4} md={5} lg={3}>
              <Box mt={1} ml={16} >
-              <Typography variant="h1" 
+              <StyledTypography variant="h1" 
                className="section-2-about" 
                 >   
                  <Box
@@ -50,8 +98,9 @@ function HomeBody(props) {
                   fontSize={130}
                  >
                     About
+                    
                  </Box>         
-              </Typography>
+              </StyledTypography>
              </Box>
                <Box mt={14.6}   >   
                 <img src={Section2Png} 
@@ -60,9 +109,10 @@ function HomeBody(props) {
              </Box>
            
           </Grid>
-          <Grid item lg={1}>
+          <Grid item md={1} lg={1}>
                
           </Grid>
+          {/* </ThemeProvider> */}
         </Grid>
 
 
