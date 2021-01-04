@@ -21,14 +21,39 @@
   background-attachment: fixed;
   font-size: 100px;
 
-  
-  
 }
 
 
-.section-2{
-  background-color: aliceblue;
+.section-2-container{
+  height: 100vh;
 }
+
+.section-2-left-hr{
+  width:30%;
+  margin-right: 100%;
+  margin-top: 7%;
+  /* margin:0 auto; */
+}
+.section-2-png{
+  width: 500px;
+  height: 560px;
+  z-index: 100;
+  position: relative;
+}
+
+/* .section-2-png-frame{
+  width: 500px;
+  height: 560px;
+  border-color: black;
+  z-index: 80;
+  position: absolute;
+} */
+.section-2-about{
+  z-index: 90;
+  position: absolute;
+
+}
+
   
 
 .section-3{
