@@ -40,7 +40,7 @@
 
 @media only screen and (min-width: 600px) {
   .section-2-container{
-    height: 130vh;
+    height: 114vh;
   
   }
   
@@ -59,13 +59,7 @@
   position: relative;
 }
 
-/* .section-2-png-frame{
-  width: 500px;
-  height: 560px;
-  border-color: black;
-  z-index: 80;
-  position: absolute;
-} */
+
 .section-2-about{
   z-index: 90;
   position: absolute;
@@ -75,8 +69,32 @@
   
 
 .section-3{
-  background-color: pink;
+  display: flex;
+  /* position: relative; */
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  white-space: nowrap;
+   background-image: url('../../../images/section-3-bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 100px;
 }
+
+
+.section-3-container{
+  height: 114vh;
+  /* position: absolute; */
+
+}
+
+
+
+
   
 .section-4{
   background-color: yellow;

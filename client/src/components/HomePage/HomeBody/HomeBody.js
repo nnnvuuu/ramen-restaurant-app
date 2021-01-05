@@ -6,22 +6,12 @@ import {Grid,Box,Typography,
     responsiveFontSizes,withStyles,makeStyles,
     useMediaQuery,useTheme} from '@material-ui/core'
 import Section2Png from '../../../images/section-2.jpg';
-import { color } from '@material-ui/system';
-import { wrap } from 'module';
-import { inherits } from 'util';
+import Section3bgPng from '../../../images/section-3-bg.jpg';
 
 
 
 
 
-// const colorTheme = createMuiTheme({
-//     palette: {
-//       primary: { main: "#800000", contrastText: "#fff" },
-//       secondary: { main: "#03a9f4", contrastText: "#000" }
-//     // type: 'dark',
-//     },
-
-//   });
 
 const useStyles = makeStyles((theme) => ({
 
@@ -182,11 +172,10 @@ function HomeBody() {
         </div>
         
         <Grid container justify="center"
-  alignItems="flex-start" className="section-2-container">
+        alignItems="flex-start" className="section-2-container">
 
         {xsMatches?<About class={classes}/> :null}
 
-          {/* <Grid item xs={0}/> */}
           <Grid item xs={10}  sm={4} md={4} lg={4} >
             <Box  mt={20} >
                 <Typography variant="h5"  >
@@ -237,8 +226,32 @@ function HomeBody() {
         </Grid>
 
 
+ 
+        <div className="section-3 ">
+          <Grid
+           container
+          justify="center"
+          alignItems="flex-start"
+          className="section-3-container"
+          >
+           <Grid item lg={1}/>
+
+            <Grid item lg={4}>
+           
+            </Grid>
+
+            <Grid item lg={1}>
     
-        <div className="section-3 box ">menu</div>
+            </Grid>
+
+            <Grid item lg={6}>
+              
+                </Grid>
+          </Grid>
+        
+        </div>
+
+        {/* <div className="section-3 box ">menu</div> */}
         <div className="section-4 box ">gallery</div>
         <div className="section-5 box ">address</div>
         <div className="section-6 box ">map</div>
