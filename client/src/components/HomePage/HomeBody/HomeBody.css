@@ -24,9 +24,26 @@
 }
 
 
-.section-2-container{
+/* .section-2-container{
   height: 120vh;
 
+  
+} */
+
+@media only screen and (max-width: 599px) {
+  .section-2-container{
+    height: 150vh;
+  
+  }
+  
+}
+
+@media only screen and (min-width: 600px) {
+  .section-2-container{
+    height: 130vh;
+  
+  }
+  
 }
 
 .section-2-left-hr{

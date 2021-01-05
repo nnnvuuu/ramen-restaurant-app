@@ -3,7 +3,8 @@ import './HomeBody.css';
 import RamenTitlePng from '../../../images/RAMEN-title.png';
 import {Grid,Box,Typography,
     Button,ThemeProvider, createMuiTheme,
-    responsiveFontSizes,withStyles,makeStyles} from '@material-ui/core'
+    responsiveFontSizes,withStyles,makeStyles,
+    useMediaQuery,useTheme} from '@material-ui/core'
 import Section2Png from '../../../images/section-2.jpg';
 import { color } from '@material-ui/system';
 import { wrap } from 'module';
@@ -34,13 +35,27 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         [theme.breakpoints.down('sm')]: {
             
-            width: '300px',
+            width: '400px',
             height: '550px',
             marginTop:'12rem',
-            minWidth:'350px',
-           
-        
+
         },
+
+        [theme.breakpoints.down(770)]: {
+            width: '330px',
+            height: '550px',
+    },
+
+        [theme.breakpoints.down('xs')]: {
+          width: '100%',
+          height: '400px',
+          margin:'0',
+      
+    
+      },
+
+
+       
       
     },
 
@@ -60,8 +75,24 @@ const useStyles = makeStyles((theme) => ({
         },
      
     },
+    
+    section2Title:{
+
+        [theme.breakpoints.down('sm')]: {
+            fontSize:'2rem',
+            
+    },
+
+    [theme.breakpoints.down('xs')]:{
+           marginTop:'10px',
+    }
+
+},
+
+
     aboutMobile:{
         display:'none',
+        
         [theme.breakpoints.down('sm')]: {
             display:'inline',
             color: '#8B4513',
@@ -75,6 +106,14 @@ const useStyles = makeStyles((theme) => ({
             marginTop:'6.9rem',
             
             // marginLeft:'7.5rem',
+          },
+
+          [theme.breakpoints.down('xs')]: {
+            marginTop:0,
+            borderColor:'#808080',
+            borderStyle: 'outset',
+            padding:'8px'
+            // border:'2px',
           },
 
         
@@ -107,14 +146,34 @@ const StyledButton = withStyles({
       color: '#8B4513',
       opacity:0.5,
     },
+   
   })(Typography);
 
 
 
 
+const About = (props) =>{
+  
+    return(
+        <>
+         <Typography variant="h1" 
+     className={props.class.aboutMobile} 
+                >   
+                 <Box >
+                    About
+                 </Box>   
+                       
+         </Typography>
+        </>
+    )
+}
 
-function HomeBody(props) {
+
+function HomeBody() {
+    const theme = useTheme();
     const classes = useStyles();
+    const smMatches = useMediaQuery(theme.breakpoints.only('sm'));
+    const xsMatches = useMediaQuery(theme.breakpoints.only('xs'));
   return (
     <>
         <div className="section-1 ">
@@ -124,13 +183,16 @@ function HomeBody(props) {
         
         <Grid container justify="center"
   alignItems="flex-start" className="section-2-container">
-     {/* <ThemeProvider theme={colorTheme}> */}
-          <Grid item xs={12} sm={5} md={4} lg={4} >
-            <Box  mt={20}>
-                <Typography variant="h5" >
+
+        {xsMatches?<About class={classes}/> :null}
+
+          {/* <Grid item xs={0}/> */}
+          <Grid item xs={10}  sm={4} md={4} lg={4} >
+            <Box  mt={20} >
+                <Typography variant="h5"  >
                     About the Resturant
                 </Typography>
-                <StyledTypography variant="h3" >
+                <StyledTypography variant="h3"  className={classes.section2Title}>
                    BEST RAMEN EXPERIENCE EVER!
                 </StyledTypography>
                 <hr className="section-2-left-hr"/>
@@ -147,17 +209,10 @@ function HomeBody(props) {
              </Box>
           </Grid>
          <Grid item   sm={1} md={1} lg ={1}>
-         <Box  >
-              <Typography variant="h1" 
-               className={classes.aboutMobile} 
-                >   
-                 <Box >
-                    About
-                 </Box>         
-              </Typography>
-             </Box>
+      
+            {smMatches?<About class={classes}/>:null}
          </Grid>
-          <Grid item sm={5} md={5} lg={3}>
+          <Grid item xs={10} sm={5} md={5} lg={3}>
              <Box  >
               <Typography variant="h1" 
                className={classes.about} 
@@ -178,10 +233,8 @@ function HomeBody(props) {
           <Grid item sm={1} md={1} lg={1}>
                
           </Grid>
-          {/* </ThemeProvider> */}
+
         </Grid>
-
-
 
 
     
