@@ -7,6 +7,17 @@ import {Grid,Box,Typography,
     useMediaQuery,useTheme} from '@material-ui/core'
 import Section2Png from '../../../images/section-2.jpg';
 import Section3bgPng from '../../../images/section-3-bg.jpg';
+import 味增拉面 from '../../../images/味增拉面.png';
+import 豚骨拉面 from '../../../images/豚骨拉面.png';
+import 喜多方拉面 from '../../../images/喜多方拉面.png';
+import 盐味拉面 from '../../../images/盐味拉面.png';
+import 酱油叉烧拉面 from '../../../images/酱油叉烧拉面.png';
+import  鱼贝类拉面 from '../../../images/鱼贝类拉面.png';
+import 寿司 from '../../../images/寿司.png';
+import 日式锅贴 from '../../../images/日式锅贴.png';
+import 酱油拌面 from '../../../images/酱油拌面.png';
+import 兰州拉面 from '../../../images/兰州拉面.png';
+
 
 
 
@@ -107,6 +118,16 @@ const useStyles = makeStyles((theme) => ({
           },
 
         
+    },
+
+    menuItems:{
+      zIndex:82,
+      position: 'absolute',
+      [theme.breakpoints.down('lg')]:{
+        width:'200px',
+        height:'150px',
+        marginLeft:'5rem',
+      }
     }
 
 
@@ -224,29 +245,105 @@ function HomeBody() {
           </Grid>
 
         </Grid>
+    
 
+    
 
- 
         <div className="section-3 ">
+
+        <Typography className='section-3-title' > 
+                hi
+         </Typography>
+
           <Grid
            container
           justify="center"
           alignItems="flex-start"
           className="section-3-container"
+     
           >
-           <Grid item lg={1}/>
-
-            <Grid item lg={4}>
-           
-            </Grid>
-
-            <Grid item lg={1}>
     
+
+            <Grid item lg={3}>
+              <img src={味增拉面} className={classes.menuItems}/>
+     
+            
+
+            </Grid >
+             <Grid item lg={3}>
+              <img src={豚骨拉面}
+               className={classes.menuItems} 
+              >
+            
+              </img>
+            </Grid>
+            <Grid item lg={3}>
+            <img src={喜多方拉面}
+               className={classes.menuItems} 
+              >
+              
+              </img>
             </Grid>
 
-            <Grid item lg={6}>
+            <Grid item lg={3}>
+            <img src={盐味拉面}
+               className={classes.menuItems} 
+              >
               
-                </Grid>
+              </img>
+            </Grid>
+
+            <Grid item lg={3}>
+            <img src={酱油叉烧拉面}
+               className={classes.menuItems} 
+              >
+              
+              </img>
+             </Grid>
+
+             <Grid item lg={3}>
+             <img src={鱼贝类拉面}
+               className={classes.menuItems} 
+              >
+              
+              </img>
+              </Grid>
+
+          
+
+              <Grid item lg={3}>
+              <img src={兰州拉面}
+               className={classes.menuItems} 
+              >
+              
+              </img>
+              </Grid>
+
+           
+
+              <Grid item lg={3}>
+              <img src={酱油拌面}
+               className={classes.menuItems} 
+              >
+              
+              </img>
+              </Grid>
+
+              {/* <Grid item >
+              <img src={日式锅贴}
+               className={classes.menuItems} 
+              >
+              
+              </img>
+              </Grid>
+
+              <Grid item >
+              <img src={寿司}
+               className={classes.menuItems} 
+              >
+              
+              </img>
+              </Grid> */}
           </Grid>
         
         </div>
