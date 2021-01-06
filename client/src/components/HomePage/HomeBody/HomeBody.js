@@ -123,10 +123,13 @@ const useStyles = makeStyles((theme) => ({
     menuItems:{
       zIndex:82,
       position: 'absolute',
+      verticalAlign:' text-bottom',
       [theme.breakpoints.down('lg')]:{
         width:'200px',
         height:'150px',
         marginLeft:'5rem',
+
+       
       }
     }
 
@@ -250,10 +253,12 @@ function HomeBody() {
     
 
         <div className="section-3 ">
-
-        <Typography className='section-3-title' > 
-                hi
-         </Typography>
+    
+        <div className='section-3-title' > 
+            <Typography variant='h2'>
+               MENU メニュー
+            </Typography>
+         </div>
 
           <Grid
            container
@@ -266,47 +271,66 @@ function HomeBody() {
 
             <Grid item lg={3}>
               <img src={味增拉面} className={classes.menuItems}/>
-     
-            
-
+              <Box className='section-3-itemsIntro'>
+                   <Typography>
+                      味增拉面 $12
+                   </Typography>
+                </Box>
             </Grid >
+
              <Grid item lg={3}>
               <img src={豚骨拉面}
                className={classes.menuItems} 
-              >
-            
-              </img>
+              />
+               <Box className='section-3-itemsIntro'>
+                   <Typography>
+                      豚骨拉面 $12
+                   </Typography>
+                </Box>
             </Grid>
             <Grid item lg={3}>
             <img src={喜多方拉面}
                className={classes.menuItems} 
-              >
+             />
               
-              </img>
+              <Box className='section-3-itemsIntro'>
+                   <Typography>
+                      喜多方拉面 $12
+                   </Typography>
+                </Box>
             </Grid>
 
             <Grid item lg={3}>
             <img src={盐味拉面}
                className={classes.menuItems} 
-              >
-              
-              </img>
+            />
+               <Box className='section-3-itemsIntro'>
+                   <Typography>
+                       盐味拉面 $12
+                   </Typography>
+                </Box>
             </Grid>
 
             <Grid item lg={3}>
             <img src={酱油叉烧拉面}
                className={classes.menuItems} 
-              >
-              
-              </img>
+              />  
+              <Box className='section-3-itemsIntro'>
+                   <Typography>
+                       酱油叉烧拉面 $12
+                   </Typography>
+                </Box>>
              </Grid>
 
              <Grid item lg={3}>
              <img src={鱼贝类拉面}
                className={classes.menuItems} 
-              >
-              
-              </img>
+            />
+              <Box className='section-3-itemsIntro'>
+                   <Typography>
+                       鱼贝类拉面 $12
+                   </Typography>
+                </Box>
               </Grid>
 
           
@@ -314,9 +338,12 @@ function HomeBody() {
               <Grid item lg={3}>
               <img src={兰州拉面}
                className={classes.menuItems} 
-              >
-              
-              </img>
+              />
+               <Box className='section-3-itemsIntro'>
+                   <Typography>
+                      兰州拉面 $12
+                   </Typography>
+                </Box>
               </Grid>
 
            
@@ -324,9 +351,12 @@ function HomeBody() {
               <Grid item lg={3}>
               <img src={酱油拌面}
                className={classes.menuItems} 
-              >
-              
-              </img>
+             />
+                <Box className='section-3-itemsIntro'>
+                   <Typography>
+                       酱油拌面 $12
+                   </Typography>
+                </Box>
               </Grid>
 
               {/* <Grid item >
