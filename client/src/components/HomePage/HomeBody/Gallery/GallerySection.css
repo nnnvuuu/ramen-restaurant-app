@@ -1,8 +1,43 @@
+.container{
+  height: 100vh;
+}
+
 .carousel-wrapper{
-  /* display: block;
-  margin: 0 auto;
-  margin-top: 50px;
-  width: 60%; */
-  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:80%;
+  margin-top: 10px;
 
 }
+.image-wrapper{
+  background-color:#ffff;
+
+}
+
+
+
+
+@media only screen and (min-width:600px ) {
+ 
+  
+}
+
+@media only screen and (min-width: 960px) {
+  /* .image{
+    margin-left: 20px;
+    height:450px;
+  }
+   */
+  
+}
+
+@media only screen and (min-width: 1280px) {
+  .image{
+    margin-left: 20px;
+    height:500px;
+  }
+  
+  
+}
+

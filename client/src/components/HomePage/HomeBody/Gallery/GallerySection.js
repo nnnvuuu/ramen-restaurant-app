@@ -1,55 +1,75 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import './GallerySection.css';
-import Slider from "react-slick";
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import {Typography,Box,withStyles,makeStyles,useMediaQuery,useTheme } from '@material-ui/core';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 //https://www.bonappetit.com/recipe/vegetarian-ramen nice design  
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    slidesToSlide: 3 // optional, default to 1.
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    slidesToSlide: 2 // optional, default to 1.
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1 // optional, default to 1.
-  }
-};
 
-const GallerySection = (props) =>{
+
+const StyledTypography = withStyles({
+  root: {
+    color: '#8B4513',
+    opacity:0.5,
+  },
  
-return(
-    <Carousel 
-    swipeable={false}
-  draggable={false}
-  showDots={true}
-  responsive={responsive}
-  ssr={true} // means to render carousel on server-side.
-  infinite={true}
-  autoPlaySpeed={1000}
-  keyBoardControl={true}
-  customTransition="all .5"
-  transitionDuration={500}
-  containerClass="carousel-container"
-  removeArrowOnDeviceType={["tablet", "mobile"]}
-  dotListClass="custom-dot-list-style"
-  itemClass="carousel-item-padding-40-px"
-    >
+})(Typography);
 
-      <div><img src='https://www.justonecookbook.com/wp-content/uploads/2019/05/Miso-Ramen-I.jpg'/></div>
-      <div><img src='https://i.pinimg.com/736x/c7/c0/a5/c7c0a526a466c80841f17a570802c16b.jpg'/></div>
-      <div>Item 3</div>
-      <div>Item 4</div>
+// const useStyles = makeStyles((theme) => ({
 
-    </Carousel>
-);
 
+
+// }));
+
+
+const GallerySection = () =>{
+    const [SlidePercentage,setSlidePercentage] = useState(70);
+    const theme = useTheme();
+    const xsMatche = useMediaQuery(theme.breakpoints.down('xs'));
+    const smMatche = useMediaQuery(theme.breakpoints.down('sm'));
+    const mdMatche = useMediaQuery(theme.breakpoints.down('md'));
+    const lgMatche = useMediaQuery(theme.breakpoints.down('lg'));
+
+    // if(lgMatche) setSlidePercentage(70);
+    // else if(mdMatche) setSlidePercentage(50);
+    // else if(smMatche) setSlidePercentage(30);
+    // else if(xsMatche) setSlidePercentage(10);
+
+  return(
+    <>
+      <StyledTypography variant ='h1' >
+        <Box textAlign='center' letterSpacing={3} mt={3} >
+           Gallery
+        </Box>
+       </StyledTypography>
+      <div className='container'>
+        <div className='carousel-wrapper'>
+         <Carousel 
+         infiniteLoop
+         useKeyboardArrows
+         autoPlay 
+         showStatus={false}
+         centerMode
+        //  centerSlidePercentage={50}
+        centerSlidePercentage={50}
+         showThumbs={false}
+          >
+                  <div style={{backgroundColor:'white'}}>
+                      <img className='image'src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" />
+                  </div >
+                  <div style={{backgroundColor:'white'}}>
+                      <img  className='image'src="https://www.sciencemag.org/sites/default/files/styles/article_main_image_-_1280w__no_aspect_/public/dogs_1280p_0.jpg?itok=6jQzdNB8" />
+                  </div>
+                  <div style={{backgroundColor:'white'}}>
+                      <img   className='image'src="https://cdn.vox-cdn.com/thumbor/E95GFrahUCtg_WUYpSpf1cgYGsw=/0x0:960x639/1200x900/filters:focal(295x276:447x428)/cdn.vox-cdn.com/uploads/chorus_image/image/61055427/48386721_1922685597829418_3502338425917276160_n.1535484911.jpg" />
+                  </div>
+              </Carousel>
+  
+                
+          </div>
+      </div>
+  
+    </>
+  );
 }
 
 
