@@ -1,0 +1,151 @@
+
+
+
+
+
+@media only screen and (min-width:300px ) {
+    .address-container{
+        /* height:40vh; */
+        /* background-color: burlywood; */
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-evenly;
+        height: auto;
+        flex-wrap: wrap;  
+     
+        /* by default, but add it as a reminder*/
+        flex-direction: row;
+        align-items: stretch;  
+        /* justify-content: flex-start; */
+
+    
+     
+    }
+    .address-section-img{
+        font-size: 2rem;
+      
+    }
+ 
+    .address-section-div-wrapper{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height:25vh;
+        
+    }
+}
+
+
+
+@media only screen and (min-width:600px ) {
+    .address-container{
+        /* height:40vh; */
+        /* background-color: burlywood; */
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem;
+        display: flex;
+        /* justify-content: space-evenly; */
+        justify-content: space-between;
+        height: auto;
+        flex-wrap: wrap;  
+     
+        /* by default, but add it as a reminder*/
+        flex-direction: row;
+        align-items: stretch;  
+        /* justify-content: flex-start; */
+
+    
+     
+    }
+    .address-section-img{
+        font-size: 2rem;
+      
+    }
+ 
+    .address-section-div-wrapper{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height:25vh;
+        
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .address-container{
+        /* height:40vh; */
+        /* background-color: burlywood; */
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-evenly;
+        height: auto;
+        flex-wrap: wrap;  
+     
+        /* by default, but add it as a reminder*/
+        flex-direction: row;
+        align-items: stretch;  
+        /* justify-content: flex-start; */
+
+    
+     
+    }
+    .address-section-img{
+        font-size: 2rem;
+      
+    }
+ 
+    .address-section-div-wrapper{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height:25vh;
+        
+    }
+  
+}
+
+@media only screen and (min-width: 1280px) {
+    .address-container{
+        /* height:40vh; */
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem;
+        /* background-color: burlywood; */
+        display: flex;
+        /* justify-content: space-evenly; */
+        justify-content: space-evenly;
+        height: auto;
+        flex-wrap: wrap;  
+     
+        /* by default, but add it as a reminder*/
+        flex-direction: row;
+        align-items: stretch;  
+        /* justify-content: flex-start; */
+
+    
+     
+    }
+    .address-section-img{
+        font-size: 2rem;
+      
+    }
+ 
+    .address-section-div-wrapper{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height:25vh;
+        
+    }
+  
+}
+

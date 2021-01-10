@@ -36,11 +36,9 @@ const GallerySection = () =>{
 
   return(
     <>
-      <StyledTypography variant ='h1' >
-        <Box textAlign='center' letterSpacing={3} mt={3} >
+      <h1 className='gallery-title' > 
            Gallery
-        </Box>
-       </StyledTypography>
+       </h1>
       <div className='container'>
         <div className='carousel-wrapper'>
          <Carousel 
