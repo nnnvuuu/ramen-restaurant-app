@@ -33,7 +33,7 @@ const useStyle = makeStyles((theme)=>({
 
   bar:{
     backgroundColor:'#f8f8f8',
-    height:'60px',
+    height:'30px',
     width:'100%',
   }
 }));

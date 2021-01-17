@@ -24,7 +24,7 @@ const RamenMenu = () => {
            mediaTitle={'味增拉面'}
            chnTitle={'味增拉面'}
            engTitle={'Miso Ramen'}
-           japTitle={'味噌ラーメン'}
+           japTitle={'みそラーメン'}
            price={'$8'}
            numberOfRating={114514}
            rating={5}
