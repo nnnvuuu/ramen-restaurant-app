@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme)=>({
         backgroundColor:'#f8f8f8',
         height:'60px',
         width:'100%',
+        // position: '-webkit-sticky',
+        position: 'sticky',
+        top: '80px',
+        zIndex:800,
     },
     subtitle:{
         backgroundColor:'#000000',
