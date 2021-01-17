@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Menu from './components/Menu/MenuPage';
 
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
       <Router>
         <Switch>
            <Route path="/" exact component={HomePage}/>
-  
+         </Switch>
+         <Switch>
+           <Route path="/Menu" exact component={Menu}/>
          </Switch>
         </Router>
     </div>
