@@ -131,6 +131,8 @@ const MenuPage = () => {
         snackClick?<SnackMenu/>:
         drinkClick?<DrinkMenu/>:null
         }
+
+        
     </div>
   );
 }

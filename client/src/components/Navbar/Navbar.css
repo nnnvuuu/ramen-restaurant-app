@@ -1,6 +1,6 @@
 .nav-wrapper{
   background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-  height: 80px;
+  height: 80px ; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,10 +73,10 @@ li:first-child{
 
 
 .nav-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
+  display: flex ;
+  align-items: center ;
+  width: 100% ;
+  justify-content: center ;
 
 }
 
@@ -133,6 +133,7 @@ li:first-child{
     position: absolute;
     top: -100%;
     width:100%;
+    height:500px;
     box-sizing: border-box;
     margin-top: 5rem;
     margin-left: auto;
