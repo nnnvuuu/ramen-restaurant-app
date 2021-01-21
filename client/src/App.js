@@ -21,6 +21,9 @@ function App() {
            <Route path="/Menu" exact component={Menu}/>
          </Switch>
          <Switch>
+           <Route path="/order" exact component={Menu}/>
+         </Switch>
+         <Switch>
            <Route path="/checkout" exact component={CheckoutPage}/>
          </Switch>
          <Switch>
