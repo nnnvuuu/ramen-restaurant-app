@@ -8,6 +8,7 @@ import 兰州拉面 from  '../../../images/兰州拉面.png';
 import 沾面 from  '../../../images/沾面.png';
 import Ramens from './Ramens';
 import Paginations from '../Pagination/Paginations';
+import PopoutFooter from '../PopoutFooter/PopoutFooter';
 
 //https://www.wikiwikinomnom.com/product/wiki-wiki-shio-ramen/13  reference
 
@@ -20,6 +21,52 @@ const ramenDetails = [
     price:'$10',
     numberOfRating:3,
     rating:2,
+    ramenAddOns:[
+  
+      {
+        type:'Egg',
+        cost:1,
+      },
+      {
+        type:'Extra Egg',
+        cost:1,
+      },
+
+      {
+        type:'Extra Chashu',
+        cost:3,
+      },
+      
+      {
+        type:'Extra Corn',
+        cost:1,
+      },
+
+      {
+        type:'Extra Bamboo',
+        cost:1,
+      },
+
+      {
+        type:'Extra Spinach ',
+        cost:1,
+      },
+
+      {
+        type:'Extra Noodle ',
+        cost:3,
+      },
+
+      {
+        type:'Extra Mushroom ',
+        cost:3,
+      },
+
+      {
+        type:'Spicy Flakes ',
+        cost:0.25,
+      },
+    ]
   },
   {
     image:味增拉面, 
@@ -28,7 +75,53 @@ const ramenDetails = [
     japTitle:'みそラーメン',
     price:'$8',
     numberOfRating:5,
-    rating:5
+    rating:5,
+    ramenAddOns:[
+  
+      {
+        type:'Egg',
+        cost:1,
+      },
+      {
+        type:'Extra Egg',
+        cost:1,
+      },
+
+      {
+        type:'Extra Chashu',
+        cost:3,
+      },
+      
+      {
+        type:'Extra Corn',
+        cost:1,
+      },
+
+      {
+        type:'Extra Bamboo',
+        cost:1,
+      },
+
+      {
+        type:'Extra Spinach ',
+        cost:1,
+      },
+
+      {
+        type:'Extra Noodle ',
+        cost:3,
+      },
+
+      {
+        type:'Extra Mushroom ',
+        cost:3,
+      },
+
+      {
+        type:'Spicy Flakes ',
+        cost:0.25,
+      },
+    ]
   },
 
   {
@@ -38,7 +131,53 @@ const ramenDetails = [
     japTitle:'しょうゆラーメン',
     price:'$8',
     numberOfRating:3,
-    rating:1
+    rating:1,
+    ramenAddOns:[
+  
+      {
+        type:'Egg',
+        cost:1,
+      },
+      {
+        type:'Extra Egg',
+        cost:1,
+      },
+
+      {
+        type:'Extra Chashu',
+        cost:3,
+      },
+      
+      {
+        type:'Extra Corn',
+        cost:1,
+      },
+
+      {
+        type:'Extra Bamboo',
+        cost:1,
+      },
+
+      {
+        type:'Extra Spinach ',
+        cost:1,
+      },
+
+      {
+        type:'Extra Noodle ',
+        cost:3,
+      },
+
+      {
+        type:'Extra Mushroom ',
+        cost:3,
+      },
+
+      {
+        type:'Spicy Flakes ',
+        cost:0.25,
+      },
+    ]
   },
 
   {
@@ -48,7 +187,53 @@ const ramenDetails = [
     japTitle:'しおラーメン',
     price:'$8',
     numberOfRating:3,
-    rating:3.5
+    rating:3.5,
+    ramenAddOns:[
+  
+      {
+        type:'Egg',
+        cost:1,
+      },
+      {
+        type:'Extra Egg',
+        cost:1,
+      },
+
+      {
+        type:'Extra Chashu',
+        cost:3,
+      },
+      
+      {
+        type:'Extra Corn',
+        cost:1,
+      },
+
+      {
+        type:'Extra Bamboo',
+        cost:1,
+      },
+
+      {
+        type:'Extra Spinach ',
+        cost:1,
+      },
+
+      {
+        type:'Extra Noodle ',
+        cost:3,
+      },
+
+      {
+        type:'Extra Mushroom ',
+        cost:3,
+      },
+
+      {
+        type:'Spicy Flakes ',
+        cost:0.25,
+      },
+    ]
   },
 
   {
@@ -58,7 +243,53 @@ const ramenDetails = [
     japTitle:'ぎゅうにくめん',
     price:'$9',
     numberOfRating:1000,
-    rating:5
+    rating:5,
+    ramenAddOns:[
+  
+      {
+        type:'Egg',
+        cost:1,
+      },
+      {
+        type:'Extra Egg',
+        cost:1,
+      },
+
+      {
+        type:'Extra Chashu',
+        cost:3,
+      },
+      
+      {
+        type:'Extra Corn',
+        cost:1,
+      },
+
+      {
+        type:'Extra Bamboo',
+        cost:1,
+      },
+
+      {
+        type:'Extra Spinach ',
+        cost:1,
+      },
+
+      {
+        type:'Extra Noodle ',
+        cost:3,
+      },
+
+      {
+        type:'Extra Mushroom ',
+        cost:3,
+      },
+
+      {
+        type:'Spicy Flakes ',
+        cost:0.25,
+      },
+    ]
   },
 
   {
@@ -68,7 +299,53 @@ const ramenDetails = [
     japTitle:'つけめん',
     price:'$6',
     numberOfRating:3,
-    rating:1
+    rating:1,
+    ramenAddOns:[
+  
+      {
+        type:'Egg',
+        cost:1,
+      },
+      {
+        type:'Extra Egg',
+        cost:1,
+      },
+
+      {
+        type:'Extra Chashu',
+        cost:3,
+      },
+      
+      {
+        type:'Extra Corn',
+        cost:1,
+      },
+
+      {
+        type:'Extra Bamboo',
+        cost:1,
+      },
+
+      {
+        type:'Extra Spinach ',
+        cost:1,
+      },
+
+      {
+        type:'Extra Noodle ',
+        cost:3,
+      },
+
+      {
+        type:'Extra Mushroom ',
+        cost:3,
+      },
+
+      {
+        type:'Spicy Flakes ',
+        cost:0.25,
+      },
+    ]
   },
  
     
@@ -102,7 +379,8 @@ const RamenMenu = () => {
            {currentItem.map((ramens,index)=>{
              return <Ramens key={index} image={ramens.image} 
             chnTitle={ramens.chnTitle} engTitle={ramens.engTitle} japTitle={ramens.japTitle}
-            price={ramens.price} numberOfRating={ramens.numberOfRating} rating={ramens.rating} />
+            price={ramens.price} numberOfRating={ramens.numberOfRating} rating={ramens.rating}
+            ramenAddOns={ramens.ramenAddOns} />
            })}
 
             <Paginations
@@ -112,7 +390,11 @@ const RamenMenu = () => {
               currentPage={currentPage}
             />
           
+          <PopoutFooter/>
+          
         </div>
+
+       
        
     );
 }

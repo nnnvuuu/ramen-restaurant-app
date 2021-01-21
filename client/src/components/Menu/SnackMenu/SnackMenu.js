@@ -9,7 +9,7 @@ import 米饭 from  '../../../images/米饭.jpg';
 import 沾面 from  '../../../images/沾面.png';
 import Snacks from './Snacks';
 import Paginations from '../Pagination/Paginations';
-
+import PopoutFooter from '../PopoutFooter/PopoutFooter';
 //https://www.wikiwikinomnom.com/product/wiki-wiki-shio-ramen/13  reference
 
 const snackDetails = [
@@ -107,7 +107,7 @@ const SnackMenu = () => {
               paginate={paginate}
               currentPage={currentPage}
             />
-          
+        <PopoutFooter/>
         </div>
        
     );

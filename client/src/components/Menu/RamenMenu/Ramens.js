@@ -1,10 +1,26 @@
-import React from 'react';
-import {Card,CardHeader,makeStyles,Grid, Divider, CardMedia, Typography,Box,IconButton } from '@material-ui/core';
+import React,{useState} from 'react';
+import {FormControlLabel,
+  FormGroup,makeStyles,Grid, 
+  Divider, Checkbox, Typography,
+  Box,IconButton,withStyles 
+} from '@material-ui/core';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Rating from '@material-ui/lab/Rating';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CommentIcon from '@material-ui/icons/Comment';
+
+
+const GreenCheckbox = withStyles({
+  root: {
+    color: '#000000',
+    '&$checked': {
+      color: '#000000'
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
 
 const useStyle = makeStyles((theme)=>({
   root:{
@@ -35,10 +51,35 @@ const useStyle = makeStyles((theme)=>({
     backgroundColor:'#f8f8f8',
     height:'30px',
     width:'100%',
+  },
+
+  formGroup:{
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
   }
 }));
 
 const Ramens = (props) => {
+  const [state, setState] = useState({
+    checked0: false,
+    checked1: false,
+    checked2: false,
+    checked3: false,
+    checked4: false,
+    checked5: false,
+    checked6: false,
+    checked7: false,
+    checked8: false,
+
+  });
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
+
+
     const classes = useStyle();
     return( 
          <Grid
@@ -64,26 +105,59 @@ const Ramens = (props) => {
                          {props.japTitle}
                     </Box>
                 </Typography>
+
+                <Typography>
+                      <Box fontWeight='bold' mt={2}>
+                      Ramen Add On's
+                      </Box>
+                    </Typography>
+                    <Typography variant='caption'>
+                      <Box>
+                      Select all that apply
+                      </Box>
+                    </Typography>
+
                 <Grid container 
                  justify='center'
                  alignItems='center'
                  align='center'
                 >
-                    <Grid item >
+                    {/* <Grid item >
                         <Typography variant='caption'>
                             <Box letterSpacing={3}mt={3}>
                                 {props.numberOfRating + ' RATINGS  '}
                             </Box> 
-                        </Typography></Grid>
+                        </Typography>
+                        </Grid>
                     <Grid item >
                         <Box mt={3}>
                              <Rating name="size-large" defaultValue={props.rating} size="large" />
                          </Box>
-                    </Grid>
+                    </Grid> */}
+
+                
+
+                    <FormGroup row className={classes.formGroup}> 
+                           { props.ramenAddOns.map((addOn,index)=>{ 
+                                      
+                           return  <FormControlLabel
+                                 control={
+                                 <GreenCheckbox
+                                //  checked={state.checkedA}
+                                 onChange={handleChange} 
+                                 key={index}
+                                 className={classes.checkboxs}
+                                 name={"checked"+index} />}
+                                 label={addOn.type +" "+"$"+addOn.cost} 
+                                                
+                       /> 
+                    
+                        })}       
+               </FormGroup>  
                 
                 </Grid>
                 <Typography className={classes.title} variant='h4'>
-                    <Box letterSpacing={5} mt={6}>
+                    <Box letterSpacing={5} mt={2}>
                         {props.price}
                     </Box>
                 </Typography>
@@ -104,14 +178,7 @@ const Ramens = (props) => {
                         </Box>
                      </Typography>
                   </IconButton>
-                  <IconButton className={classes.iconbutton}>
-                      <CommentIcon/>
-                      <Typography variant='h6'>
-                        <Box ml={1}>
-                          Comment
-                        </Box>
-                     </Typography>
-                  </IconButton>
+                
                 </Box>
              </Grid>
              <div className={classes.bar}/>
