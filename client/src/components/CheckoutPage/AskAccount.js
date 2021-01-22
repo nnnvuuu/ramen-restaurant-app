@@ -72,11 +72,11 @@ const AskAccount = () => {
                         </Box>
                     </Typography>
                   <FormControl filled fullWidth margin='dense'>
-                    <InputLabel htmlFor="my-input">Email address</InputLabel>
+                    <InputLabel htmlFor="my-input">Username </InputLabel>
                     <Input id="my-input" aria-describedby="my-helper-text"   />
-                    <FormHelperText id="my-helper-text">
+                    {/* <FormHelperText id="my-helper-text">
                         We'll never share your email.
-                    </FormHelperText>
+                    </FormHelperText> */}
                  </FormControl>
                 
                 <FormControl filled fullWidth margin='dense'>
@@ -106,8 +106,10 @@ const AskAccount = () => {
                 </Box>
 
                <Box mt={3}>
-                <Link className={classes.link}>
-                Forgot your email address/password?
+                <Link 
+                to='resetAccount'
+                className={classes.link}>
+                Forgot your username/password?
                 </Link>
                 </Box>
 
@@ -127,13 +129,16 @@ const AskAccount = () => {
                                 Checkout without logging in. You can always create an account later.
                             </Box>
                        </Typography>
-                       <Button className={classes.guestButton}>
-                         <Typography variant='h6'>
-                              <Box fontSize={20}>
-                                 Continue
-                              </Box>
-                         </Typography>
-                       </Button>
+                       <Link to='deliveryPage'
+                       className={classes.link}>
+                         <Button className={classes.guestButton}>
+                           <Typography variant='h6'>
+                                <Box fontSize={20}>
+                                   Continue
+                                </Box>
+                           </Typography>
+                         </Button>
+                       </Link>
                        <Box mt={6}>
                            <Divider/>
                        </Box>

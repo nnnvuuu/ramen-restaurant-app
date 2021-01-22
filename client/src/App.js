@@ -12,6 +12,7 @@ import CartPage from './components/CartPage/CartPage';
 import SignUpPage from './components/SignUpPage/SignUpPage';
 import SignInPage from './components/SignInPage/SignInPage';
 import ResetAccountPage from './components/ResetAccountPage/ResetAccountPage';
+import AskDelivery from './components/CheckoutPage/AskDelievry';
 //fn + v =调整色彩
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
          </Switch>
          <Switch>
            <Route path="/resetAccount" exact component={ResetAccountPage}/>
+         </Switch>
+         <Switch>
+           <Route path="/deliveryPage" exact component={AskDelivery}/>
          </Switch>
         </Router>
     </div>
