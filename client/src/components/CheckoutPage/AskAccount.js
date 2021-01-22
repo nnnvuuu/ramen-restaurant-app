@@ -122,7 +122,7 @@ const AskAccount = () => {
                                 Guest
                             </Box>
                        </Typography>
-                       <Typography variant='h6'>
+                       <Typography variant='subtitle1'>
                             <Box mt={2}>
                                 Checkout without logging in. You can always create an account later.
                             </Box>
@@ -138,7 +138,7 @@ const AskAccount = () => {
                            <Divider/>
                        </Box>
                        <Box mt={3}>
-                           Do you want to <Link className={classes.link}>create an account</Link> now?
+                           Do you want to <Link to ='signUp' className={classes.link}>create an account</Link> now?
                        </Box>
                 </Grid>
             </Grid>

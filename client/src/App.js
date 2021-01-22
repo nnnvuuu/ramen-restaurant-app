@@ -9,6 +9,9 @@ import {
 import Menu from './components/Menu/MenuPage';
 import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 import CartPage from './components/CartPage/CartPage';
+import SignUpPage from './components/SignUpPage/SignUpPage';
+import SignInPage from './components/SignInPage/SignInPage';
+import ResetAccountPage from './components/ResetAccountPage/ResetAccountPage';
 //fn + v =调整色彩
 function App() {
   return (
@@ -28,6 +31,15 @@ function App() {
          </Switch>
          <Switch>
            <Route path="/cart" exact component={CartPage}/>
+         </Switch>
+         <Switch>
+           <Route path="/signUp" exact component={SignUpPage}/>
+         </Switch>
+         <Switch>
+           <Route path="/signIn" exact component={SignInPage}/>
+         </Switch>
+         <Switch>
+           <Route path="/resetAccount" exact component={ResetAccountPage}/>
          </Switch>
         </Router>
     </div>
