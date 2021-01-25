@@ -1,9 +1,19 @@
-import React,{useState} from 'react';
+import { Paper } from '@material-ui/core';
+import React,{useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import LogoutPage from '../LogoutPage/LogoutPage';
 
-const Navbar = () => {
 
+
+
+
+const Navbar = (props) => {
+
+ 
+  const {isAuthenticated,user } =  props.auth;
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 
@@ -26,8 +36,40 @@ const Navbar = () => {
     }
   };
 
+  const authLinks = (
+    <>
+
+      <li className='nav-item'>
+      <Link
+          to='/signIn'
+          className='nav-links'
+          onClick={closeMobileMenu}
+          >
+               <LogoutPage/>
+         </Link>
+      </li>
+    </>
+  )
+  
+  const guestLinks = (
+    <>
+      <li className='nav-item'>
+          <Link
+           to='/signIn'
+           className='nav-links'
+           onClick={closeMobileMenu}
+          >
+             Login
+           </Link>
+       </li>
+    </>
+  )
+
+
+
   return (
       <>
+      
         <nav className='nav-wrapper'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           nnn-ramen
@@ -64,7 +106,7 @@ const Navbar = () => {
                   About 
                 </Link>
               </li>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link
                   to='/signIn'
                   className='nav-links'
@@ -72,7 +114,8 @@ const Navbar = () => {
                 >
                  Login
                 </Link>
-              </li>
+              </li> */}
+                {isAuthenticated ? authLinks : guestLinks}
               <li className='nav-item'>
                 <Link
                   to='/order'
@@ -98,4 +141,13 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired
+
+}
+
+const mapStateToProps = state  =>({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps,null)(Navbar);

@@ -1,18 +1,24 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React,{useEffect, useState,useRef,} from 'react';
+import {Link,useHistory} from 'react-router-dom';
 import NavBar from '../Navbar/Navbar';
 import {Button,makeStyles,Grid,Box,Paper, Typography,
-  FormControl,InputLabel,Input,FormControlLabel,TextField,IconButton,Divider}
+  FormControl,InputLabel,Input,FormControlLabel,
+  TextField,IconButton,Divider}
    from '@material-ui/core';
-   import InstagramIcon from '@material-ui/icons/Instagram';
-   import TwitterIcon from '@material-ui/icons/Twitter';
-   import FacebookIcon from '@material-ui/icons/Facebook';
+import Alert from '@material-ui/lab/Alert';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {register} from '../../redux/actions/authAction';
+import {clearErrors} from '../../redux/actions/errorAction';
    
 const useStyles = makeStyles((theme)=>({
   root:{
       backgroundColor:'#565A6D',
       background:'#565A6D',
-      height:'90vh',
+      height:'100vh',
       display: "flex",
       alignItems: 'center',
       justifyContent: 'center',
@@ -23,7 +29,7 @@ const useStyles = makeStyles((theme)=>({
     //   width: theme.spacing(16),
     //   height: theme.spacing(16),
     width: '35rem',
-  height: '38rem',
+  height: '42rem',
   },
   signUpContainer:{
   
@@ -70,10 +76,68 @@ const useStyles = makeStyles((theme)=>({
 
 }))
 
-const SignUpPage = () => {
+const SignUpPage = (props) => {
   const classes = useStyles();
+  const [email,setEmail] = useState('');
+  const [username,setUsername] = useState('');
+  const [password,setPassword] = useState('');
+  const [passwordCheck,setPasswordCheck] = useState('');
+  const [errMsg,setErrMsg] = useState(null);
+
+  // notify.show("Email sent, check your inbox to confirm","success");
+   //follow is how you use componentDidUpdate(prevProps) in functional component
+   const prevProps = usePrevious(props.error);
+
+   function usePrevious(value) {
+     const ref = useRef();
+   useEffect(() => {
+ 
+     ref.current = value;
+     const { error,isAuthenticated} = props;
+     if(error !== prevProps){
+       //check for register error
+       if(error.id === 'REGISTER_FAIL'){
+        setErrMsg(error.msg.msg);
+       }
+       else{
+        setErrMsg(null);
+       }
+     }
+       //redirect when login successfully.
+     if(isAuthenticated){
+       props.clearErrors();
+      history.push("/", { from: "signUp" });
+      //  setTimeout(()=>history.push("/", { from: "signUp" }), 5000);
+     }
+
+    
+ });
+     return ref.current;
+   }
+ 
+
+  const handleChange = (e) => {
+    if(e.target.name=='email') setEmail(e.target.value);
+    else if(e.target.name=='username') setUsername(e.target.value);
+    else if(e.target.name=='password') setPassword(e.target.value);
+    else if(e.target.name=='repassword') setPasswordCheck(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    
+    e.preventDefault();
+    const newUser = {email,password,passwordCheck,username}
+    props.register(newUser);
+    // if(props.isAuthenticated) 
+    //   history.push("/NotifyEmailConfirm", { from: "signUp" });
+  }
+  const history = useHistory();
+
+
+
   return (
     <div >
+     
       <NavBar/>
       <Box className={classes.root}>
       <Paper className={classes.paper}>
@@ -96,17 +160,22 @@ const SignUpPage = () => {
                   </Typography>
               </Grid>
             <Grid item>
-                <FormControl  variant="outlined"   margin='dense' fullWidth>
-               
-              
+                <FormControl 
+                 variant="outlined"  
+                  margin='dense' 
+                  fullWidth
+                  onSubmit={handleSubmit}
+                  >
                 <Box mt={2}>
                   <TextField
                         id="outlined-password-input"
                         label="Email"
                         type="email"
+                        name="email"
                         autoComplete="current-email"
                         variant="outlined"
                         fullWidth
+                        onChange={handleChange}
                      
                     />
                 </Box>
@@ -117,10 +186,12 @@ const SignUpPage = () => {
                         id="outlined-username-input"
                         label="Username"
                         type="username"
+                        name="username"
                         autoComplete="current-username"
                         variant="outlined"
                         fullWidth
-                     
+                        onChange={handleChange}
+
                     />
                 </Box>
 
@@ -129,9 +200,11 @@ const SignUpPage = () => {
                       id="outlined-password-input"
                       label="8-20 Characters"
                       type="password"
+                      name="password"
                       autoComplete="current-password"
                       variant="outlined"
                       fullWidth
+                      onChange={handleChange}
                   />
                   </Box>
 
@@ -140,17 +213,36 @@ const SignUpPage = () => {
                       id="outlined-password-input"
                       label="Enter the password again"
                       type="password"
+                      name="repassword"
                       autoComplete="current-password"
                       variant="outlined"
                       fullWidth
+                      onChange={handleChange}
                   />
                </Box>
-                </FormControl>
-                <Button className={classes.joinButton}>
+                <Button className={classes.joinButton}
+                 onClick={handleSubmit}
+                 >
                   <Typography variant='h6'>
                     Join now
                   </Typography>
                 </Button>
+
+                {errMsg?
+                <Box mt={1}>
+                  <Alert variant="outlined" severity="error">
+                      {errMsg}
+                 </Alert>
+               </Box>:null
+           
+               }
+
+
+            
+                </FormControl>
+
+             
+
                  <h2 className={classes.divider}>
                   or
                  </h2>
@@ -161,9 +253,11 @@ const SignUpPage = () => {
                   alignItems='center'
                   >
                      <Grid item >
-                       <IconButton>
-                         <FacebookIcon/>
-                       </IconButton>
+                       <Link to="/auth/facebook">
+                         <IconButton>
+                           <FacebookIcon/>
+                         </IconButton>
+                       </Link>
                       </Grid>
                       <Grid item>
                       <IconButton>
@@ -190,4 +284,17 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+SignUpPage.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  error: PropTypes.object.isRequired,
+  register:PropTypes.func.isRequired,
+  clearErrors:PropTypes.func.isRequired,
+}
+
+const mapStateToProps = state  =>({
+  isAuthenticated : state.auth.isAuthenticated,
+  error: state.error
+});
+
+
+export default connect(mapStateToProps,{register,clearErrors})(SignUpPage); //,login

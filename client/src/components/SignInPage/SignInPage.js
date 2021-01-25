@@ -1,11 +1,16 @@
-import React from 'react';
+import React,{useState,useRef,useEffect} from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {login} from '../../redux/actions/authAction';
 import {Grid,Box,makeStyles,Typography,TextField,FormControl,Button,IconButton,ButtonGroup} from '@material-ui/core';
 import { color, borderRadius } from '@material-ui/system';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import NavBar from '../Navbar/Navbar';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import {clearErrors} from '../../redux/actions/errorAction';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(()=>({
   root:{
@@ -85,6 +90,53 @@ const useStyles = makeStyles(()=>({
 
 function SignInPage(props) {
   const classes = useStyles();
+ const [username,setUsername] = useState('');
+ const [password,setPassword] = useState('');
+ const [errMsg,setErrMsg] = useState(null);
+ const history = useHistory();
+ const prevProps = usePrevious(props.error);
+
+ function usePrevious(value) {
+   const ref = useRef();
+ useEffect(() => {
+
+   ref.current = value;
+   const { error,isAuthenticated} = props;
+   if(error !== prevProps){
+     //check for register error
+     if(error.id === 'REGISTER_FAIL'){
+      setErrMsg(error.msg.msg);
+     }
+     else{
+      setErrMsg(null);
+     }
+   }
+     //redirect when login successfully.
+   if(isAuthenticated){
+     props.clearErrors();
+    history.push("/", { from: "signIn" });
+
+   }
+});
+   return ref.current;
+ }
+
+ const handleChange = (e) =>{
+    if(e.target.name == 'username') setUsername(e.target.value);
+    else if(e.target.name =='password') setPassword(e.target.value);
+  }
+
+
+ const handleSubmit = (e) =>{
+  e.preventDefault();
+
+  const user = {username,password}
+
+  // attempt to login
+  props.login(user);
+ }
+
+
   return (
     <div>
       <NavBar/>
@@ -103,33 +155,47 @@ function SignInPage(props) {
                 </Box>
               </Typography>
         </Box>
+        <FormControl fullWidth>
           <Box className={classes.inputField} >
-            <FormControl fullWidth>
               <TextField
                 id="outlined-username-input"
                 label="Username"
                 type="username"
+                name="username"
                 autoComplete="current-username"
                 variant="outlined"
                 fullWidth
+                onChange={handleChange}
               />
-             </FormControl>
         </Box>
         <Box className={classes.inputField}>
-         <FormControl fullWidth>
+         {/* <FormControl fullWidth> */}
             <TextField
               id="outlined-password-input"
               label="Password"
               type="password"
+              name="password"
               autoComplete="current-password"
               variant="outlined"
               fullWidth
+              onChange={handleChange}
             />
-           </FormControl>
-           <Button className={classes.button}>
+           {/* </FormControl> */}
+           {errMsg?
+                <Box mt={1}>
+                  <Alert variant="outlined" severity="error">
+                      {errMsg}
+                 </Alert>
+               </Box>:null
+           
+               }
+
+           <Button className={classes.button} onClick={handleSubmit}>
               Sign in
            </Button>
         </Box>
+        </FormControl>
+
         <Box iconbuttonContainer> 
          <IconButton className={classes.iconbuttons}>  
            <FacebookIcon/>
@@ -179,4 +245,19 @@ function SignInPage(props) {
   );
 }
 
-export default SignInPage;
+
+
+SignInPage.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  error: PropTypes.object.isRequired,
+  login:PropTypes.func.isRequired,
+  clearErrors:PropTypes.func.isRequired,
+}
+
+const mapStateToProps = state  =>({
+  isAuthenticated : state.auth.isAuthenticated,
+  error: state.error
+});
+
+
+export default connect(mapStateToProps,{login,clearErrors})(SignInPage); //,login
