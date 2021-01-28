@@ -7,13 +7,20 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    CONFIRMATION_FAIL,
+    CONFIRMATION_SUCCESS,
+    RESEND_SUCCESS,
+    RESEND_FAIL,
     } from '../actions/types';
     
     const initState = {
       token: localStorage.getItem('token'),
       isAuthenticated: null,
       isLoading: false,
-      user: null
+      user: null,
+      isConfirm:false,
+      isResend:false,
+      isInCooldown:false,
     };
     
     export default function ( state = initState, action){
@@ -51,6 +58,17 @@ import {
             isAuthenticated:false,
             isLoading:false
           }
+          case RESEND_SUCCESS:
+            return{
+              ...state,
+              isResend:true,
+              isInCooldown:true,
+            }
+          // case CONFIRMATION_FAIL:{
+
+          // }
+        
+
           default:
             return state;    
     }

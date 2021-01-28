@@ -15,9 +15,18 @@ const userSchema = new Schema({
     minlength:8,  
     required:true
    },
-   confirmed: {
+   pending:{
+     type:Boolean,
+     default:false
+   },
+   isConfirmed: {
     type: Boolean,
     default: false
+  },
+  secretCode:{
+    type: Number,
+    expires:600, //10 min
+
   }
 
  },

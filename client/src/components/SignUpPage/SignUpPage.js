@@ -11,9 +11,11 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {register} from '../../redux/actions/authAction';
+import {register,resend} from '../../redux/actions/authAction';
 import {clearErrors} from '../../redux/actions/errorAction';
-   
+import Countdown from 'react-countdown';
+
+
 const useStyles = makeStyles((theme)=>({
   root:{
       backgroundColor:'#565A6D',
@@ -36,6 +38,7 @@ const useStyles = makeStyles((theme)=>({
     margin:'0 auto',
     width: '80%',
     paddingTop:'1rem',
+
   },
   joinButton:{
       backgroundColor:'#1A1818',
@@ -51,6 +54,31 @@ const useStyles = makeStyles((theme)=>({
         textTransform:'none',
       }
       
+  },
+  codeTextField:{
+    width:'70%'
+  },
+  resendBtn:{
+    backgroundColor:'#000000',
+    color:'#ffffff',
+    textTransform:'none',
+    height:'3.5rem',
+    width:'30%',
+    '&:hover':{
+      backgroundColor:'#000000',
+      color:'#ffffff',
+    } 
+  },
+  disableResendBtn:{
+    backgroundColor:'#cccccc',
+    color: '#666666',
+    textTransform:'none',
+    height:'3.5rem',
+    width:'30%',
+    '&:hover':{
+      backgroundColor:'#cccccc',
+      color: '#666666',
+    } 
   },
   divider:{
     display: 'flex',
@@ -76,6 +104,11 @@ const useStyles = makeStyles((theme)=>({
 
 }))
 
+
+const authSection = (props) => {
+    
+}
+
 const SignUpPage = (props) => {
   const classes = useStyles();
   const [email,setEmail] = useState('');
@@ -83,9 +116,14 @@ const SignUpPage = (props) => {
   const [password,setPassword] = useState('');
   const [passwordCheck,setPasswordCheck] = useState('');
   const [errMsg,setErrMsg] = useState(null);
-
+  const [secretCode,setSecretCode] = useState(null);
+  const [isInCooldown,setIsInCooldown] = useState(false);
+  const [isResendClick,setIsResendClick] = useState(false);
+  const [isComplete,setIsComplete] = useState(false);
+  const [disableBtn,setDisableBtn] = useState(true);
   // notify.show("Email sent, check your inbox to confirm","success");
-   //follow is how you use componentDidUpdate(prevProps) in functional component
+   //follow is how you use componentDidUpdate(prevProps) in functional component, this didUpdate 
+   //lifeCycle function will compare to see if the error have been changed and updated the change.
    const prevProps = usePrevious(props.error);
 
    function usePrevious(value) {
@@ -93,7 +131,7 @@ const SignUpPage = (props) => {
    useEffect(() => {
  
      ref.current = value;
-     const { error,isAuthenticated} = props;
+     const { error,isAuthenticated,isInCooldown} = props;
      if(error !== prevProps){
        //check for register error
        if(error.id === 'REGISTER_FAIL'){
@@ -104,11 +142,12 @@ const SignUpPage = (props) => {
        }
      }
        //redirect when login successfully.
-     if(isAuthenticated){
-       props.clearErrors();
-      history.push("/", { from: "signUp" });
+    //  if(isAuthenticated){
+    //    props.clearErrors();
+      // history.push("/", { from: "signUp" });\
+      
       //  setTimeout(()=>history.push("/", { from: "signUp" }), 5000);
-     }
+  //   }
 
     
  });
@@ -121,6 +160,7 @@ const SignUpPage = (props) => {
     else if(e.target.name=='username') setUsername(e.target.value);
     else if(e.target.name=='password') setPassword(e.target.value);
     else if(e.target.name=='repassword') setPasswordCheck(e.target.value);
+    else if(e.target.name=='secretCode') setSecretCode(e.target.value);
   }
 
   const handleSubmit = (e) => {
@@ -128,12 +168,59 @@ const SignUpPage = (props) => {
     e.preventDefault();
     const newUser = {email,password,passwordCheck,username}
     props.register(newUser);
+    setIsResendClick(true);
+    
     // if(props.isAuthenticated) 
-    //   history.push("/NotifyEmailConfirm", { from: "signUp" });
+      //  history.push("/NotifyEmailConfirm", { from: "signUp" });
   }
+
+  const handleResend = (e) =>{
+    e.preventDefault();
+    setIsResendClick(true);
+    setIsInCooldown(true);
+    setDisableBtn(true);
+    // const resendCode = Math.floor(100000 + Math.random() * 900000);
+    // props.resend(resendCode);
+  }
+
+  const handleComplete = (e) =>{
+    setIsInCooldown(false);
+    setIsResendClick(false);
+    setDisableBtn(false);
+  }
+
+  // const renderer = ({minutes, seconds, completed }) => {
+
+  //   console.log(completed);
+  //   if (completed) {
+  //     // Render a completed state
+  //     setIsInCooldown(false);
+  //     setIsResendClick(false);
+  //   } else {
+  //     // Render a countdown
+  //     setIsInCooldown(true);
+  //     // 
+  //     console.log("mo");
+  //     return <span>{minutes}:{seconds}</span>;
+  //   }
+
+  
+  // };
+
+
+    const renderer = ({minutes, seconds }) => {
+      if(minutes == 0){
+        return <span>{seconds}</span>
+      }
+      else{
+      return <span>{minutes}:{seconds}</span>;
+      }
+  };
+
+
+
   const history = useHistory();
-
-
+  const {isAuthenticated} = props;
 
   return (
     <div >
@@ -141,6 +228,9 @@ const SignUpPage = (props) => {
       <NavBar/>
       <Box className={classes.root}>
       <Paper className={classes.paper}>
+        
+       {/* the user is still filling out the signUp form, the isAuthenticated will become true once they succeccfully filled out. */}
+        {!isAuthenticated?
           <Grid container 
           className={classes.signUpContainer}
           direction='column'
@@ -278,6 +368,92 @@ const SignUpPage = (props) => {
                 </Grid>
             </Grid>
           </Grid>
+
+          //  the user hits join now button with no error, now user will have to input the secret code.  
+              :
+      
+              <Grid container 
+              className={classes.signUpContainer}
+              direction='column'
+              >
+                 <Grid item >
+                    <Typography variant='h4'>
+                       <Box letterSpacing={2}>
+                         Sign up for account 
+                       </Box>
+                    </Typography>
+                 </Grid>
+                 <Grid item>
+                     <Typography variant='inherit'>
+                         <Box letterSpacing={2} mt={1}>
+                            nnn-ramen, All about delicious
+                         </Box>
+                      </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Box mt={5}>
+                  <p>We have sent a confirmation code to your email address. please enter the code below</p>
+                   </Box>
+                  </Grid>
+                  <FormControl 
+                 variant="outlined"  
+                  margin='dense' 
+                  fullWidth
+                  onSubmit={handleSubmit}
+                  >
+                
+                <Box >
+                  <TextField
+                        id="outlined-secretCode-input"
+                        label="Confirmation code"
+                        type="secretCode"
+                        name="secretCode"
+                        autoComplete="current-secretCode"
+                        variant="outlined"
+                        // fullWidth
+                        className={classes.codeTextField}
+                        onChange={handleChange}
+                     
+                    />
+                    <Button 
+                    className={isResendClick?classes.disableResendBtn
+                      :classes.resendBtn} 
+                      disabled = {disableBtn}
+                      onClick={handleResend}
+                      >
+                      <Typography variant='subtitle1' >
+                          { isResendClick?
+                          <Countdown
+                            date={Date.now() + 600000}
+                            onComplete={handleComplete}
+                            renderer={renderer}
+                          />
+                               
+                       :<Typography> Resend Code  </Typography>
+                       }
+                     
+                      </Typography>
+                  </Button>
+                </Box>
+
+                <Typography variant='caption'>The comfirmation code will be expired in 10 minutes</Typography>
+           
+                <Button className={classes.joinButton}
+                 onClick={handleResend}
+                 >
+                  <Typography variant='h6'>
+                    Enter
+                  </Typography>
+                </Button>
+                </FormControl>
+              
+              
+             
+
+
+                </Grid>
+            
+              } 
       </Paper>
       </Box>
     </div>
@@ -297,4 +473,4 @@ const mapStateToProps = state  =>({
 });
 
 
-export default connect(mapStateToProps,{register,clearErrors})(SignUpPage); //,login
+export default connect(mapStateToProps,{register,clearErrors,resend})(SignUpPage); //,login

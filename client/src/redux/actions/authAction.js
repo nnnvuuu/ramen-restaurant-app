@@ -13,7 +13,11 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  RESEND_FAIL,
+  RESEND_SUCCESS,
+  CONFIRMATION_FAIL,
+  CONFIRMATION_SUCCESS,
 } from './types';
 
 export const loadUser = () => (dispatch,getState) => {
@@ -51,7 +55,6 @@ export const register = ({username,email,password,passwordCheck}) => dispatch =>
   //Request body
 
   const body = JSON.stringify({username,email,password,passwordCheck});
-console.log(body);
   axios.post('http://localhost:5000/user/register',body,config)
   .then(res => dispatch({
     type: REGISTER_SUCCESS,
@@ -63,7 +66,7 @@ console.log(body);
       type: REGISTER_FAIL,
     });
   });
-  console.log('w');
+
 }
 
 //Login User 
@@ -94,6 +97,42 @@ export const login = ({username,password}) => dispatch =>{
     });
   });
 }
+
+
+export const resend = ({resendCode}) => dispatch =>{
+  const body = JSON.stringify({resendCode});
+  // console.log(username);
+  axios.post('http://localhost:5000/user/reSendCode',body)//<--
+  .then(res => dispatch({
+    type: RESEND_SUCCESS,
+    payload: res.data 
+  }))
+  .catch(err => {
+    dispatch(returnErrors(err.response.data, err.response.status,'RESEND_FAIL'));
+    dispatch({
+      type: RESEND_FAIL
+    });
+  });
+}
+
+
+
+export const confirm = ({resendCode}) => dispatch =>{
+  const body = JSON.stringify({resendCode});
+  // console.log(username);
+  axios.post('http://localhost:5000/user/confirm',body)//<--
+  .then(res => dispatch({
+    type: CONFIRMATION_SUCCESS,
+    payload: res.data 
+  }))
+  .catch(err => {
+    dispatch(returnErrors(err.response.data, err.response.status,'CONFIRMATION_FAIL'));
+    dispatch({
+      type: CONFIRMATION_FAIL,
+    });
+  });
+}
+
 
 // Logout User
 

@@ -5,6 +5,9 @@ var jwt = require('jsonwebtoken');
 var validator = require("email-validator");
 // let auth = require('../middlewares/auth');
 const JWT_SECRET = process.env.JWT_SECRET;
+const sendEmail = require('../email/email.send')
+const msgs = require('../email/email.msgs')
+const templates = require('../email/email.templates')
 // var passport = require('passport')
 // var LocalStrategy = require('passport-local').Strategy;
 
@@ -46,11 +49,15 @@ router.post("/register", async(req,res)=> {
       return res.status(400).json({ msg: 'An account with this email address already exist'});
      }
   
+     
+  
       // Check for existing username
       const existingUsername = await User.findOne({ username:username });
       if (existingUsername){
        return res.status(400).json({ msg: 'the username has already been used'});
       }
+
+      
   
   
      const salt = await bcrypt.genSalt(10);
@@ -58,12 +65,20 @@ router.post("/register", async(req,res)=> {
   
       const hash = await bcrypt.hash(password, salt);
       if (!hash) throw Error('Something went wrong hashing the password');
+
+      const SecretCode = Math.floor(100000 + Math.random() * 900000);
+
   
       const newUser = new User({
         username,
         email,
-        password: hash
+        password: hash,
+        isConfirmed:false,
+        SecretCode:SecretCode,
       });
+
+
+    
   
       const savedUser = await newUser.save();
       if (!savedUser) throw Error('Something went wrong saving the user');
@@ -77,16 +92,67 @@ router.post("/register", async(req,res)=> {
         user: {
           id: savedUser.id,
           username: savedUser.username,
-          email: savedUser.email
+          email: savedUser.email,
+          isConfirmed:savedUser.isConfirmed
         }
       });
-          // window.location.href = "http://localhost:3000/SignUp";
+
+
+      sendEmail(email,  templates.emailContent(SecretCode));
+
+  
+
   
     } catch (e) {
       res.status(400).json({ error: e.message });
-      console.log("ww");
     }
      
+  })
+
+
+  //confirm the secret code is same with the user input code
+
+  router.post('/confirm',async(req,res)=>{
+    const { userID,inputSecretCode } = req.body;
+    const existingUser = await User.findById(userID);
+    console.log(existingUser);
+    if(existingUser){
+        if(existingUser.secretCode != inputSecretCode){
+          return res.status(400).json({ msg: 'the code is not correct' });
+        }
+        else{
+            existingUser.isConfirmed = true;
+            existingUser.secretCode = null;
+        }
+    }
+
+    else{
+      return res.status(400).json({msg:'the user does not exist' });
+    }
+
+  })
+
+
+  //updated the user secret code field when user click on re-send code button.
+
+  router.post('/reSendCode',async(req,res)=>{
+    const { userID,resendCode } = req.body;
+    const existingUser = await User.findById(userID);
+    // const updatedUser = await User.findOneAndUpdate({secretCode});
+
+    if(!existingUser){
+      return res.status(400).json({msg:'the user does not exist' });
+    }
+
+  
+    if(existingUser && !existingUser.isConfirmed){
+      existingUser.secretCode = resendCode;
+    }
+
+     if(existingUser.isConfirmed){
+      existingUser.secretCode = null;
+    }
+
   })
 
 
@@ -101,6 +167,9 @@ router.post("/register", async(req,res)=> {
       // Check for existing user
       const user = await User.findOne({ username });
       if (!user) throw Error('User does not exist');
+
+      // const isConfirmed = await User.findOne({isConfirmed});
+      // if(!isConfirmed) throw Error('please finish the confirmation step before login.')
   
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) throw Error('Invalid credentials');
