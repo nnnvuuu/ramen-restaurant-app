@@ -11,9 +11,11 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {register,resend} from '../../redux/actions/authAction';
+import {register,resend,confirm} from '../../redux/actions/authAction';
 import {clearErrors} from '../../redux/actions/errorAction';
-import Countdown from 'react-countdown';
+import moment from 'moment';
+import Counter from 'react-number-counter'
+
 
 
 const useStyles = makeStyles((theme)=>({
@@ -117,13 +119,30 @@ const SignUpPage = (props) => {
   const [passwordCheck,setPasswordCheck] = useState('');
   const [errMsg,setErrMsg] = useState(null);
   const [secretCode,setSecretCode] = useState(null);
-  const [isInCooldown,setIsInCooldown] = useState(false);
-  const [isResendClick,setIsResendClick] = useState(false);
+  const [isResendClick,setIsResendClick] = useState(true);
   const [isComplete,setIsComplete] = useState(false);
   const [disableBtn,setDisableBtn] = useState(true);
+  const [counter, setCounter] =useState(300);
+  const [secToMinute,setSecToMinute] = useState('');
+
+
+  // useEffect(() => {
+    
+  
+  //   counter > 0 && setTimeout(()=> setCounter(counter - 1), 1000);
+  
+  //   if(counter==0) return handleComplete();
+ 
+  // }, [counter]);
+
+ 
+
+
+
   // notify.show("Email sent, check your inbox to confirm","success");
    //follow is how you use componentDidUpdate(prevProps) in functional component, this didUpdate 
    //lifeCycle function will compare to see if the error have been changed and updated the change.
+  
    const prevProps = usePrevious(props.error);
 
    function usePrevious(value) {
@@ -134,7 +153,7 @@ const SignUpPage = (props) => {
      const { error,isAuthenticated,isInCooldown} = props;
      if(error !== prevProps){
        //check for register error
-       if(error.id === 'REGISTER_FAIL'){
+       if(error.id === 'REGISTER_FAIL' || error.id === 'CONFIRMATION_FAIL'){
         setErrMsg(error.msg.msg);
        }
        else{
@@ -144,10 +163,13 @@ const SignUpPage = (props) => {
        //redirect when login successfully.
     //  if(isAuthenticated){
     //    props.clearErrors();
-      // history.push("/", { from: "signUp" });\
+    //   // history.push("/", { from: "signUp" });\
       
-      //  setTimeout(()=>history.push("/", { from: "signUp" }), 5000);
-  //   }
+    //   //  setTimeout(()=>history.push("/", { from: "signUp" }), 5000);
+    // }
+    // if(props.isAuthenticated){
+    //     props.clearErrors();
+    //  }
 
     
  });
@@ -164,30 +186,51 @@ const SignUpPage = (props) => {
   }
 
   const handleSubmit = (e) => {
-    
+     
     e.preventDefault();
-    const newUser = {email,password,passwordCheck,username}
+
+      //generate SecretCode
+   let secretCode = Math.floor(100000 + Math.random() * 900000);
+
+    
+    const newUser = {email,password,passwordCheck,username,secretCode}
+    // const newCode = {email,}
     props.register(newUser);
-    setIsResendClick(true);
+    // props.resend()
     
     // if(props.isAuthenticated) 
       //  history.push("/NotifyEmailConfirm", { from: "signUp" });
+
+      if(props.isAuthenticated){
+        props.clearErrors();
+      
+     }
+
+     
   }
 
   const handleResend = (e) =>{
     e.preventDefault();
     setIsResendClick(true);
-    setIsInCooldown(true);
     setDisableBtn(true);
+    setCounter(300);
     // const resendCode = Math.floor(100000 + Math.random() * 900000);
     // props.resend(resendCode);
   }
 
+  const handleSent = (e) =>{
+    e.preventDefault();
+    const inputCode = {secretCode,email}
+    props.confirm(inputCode);
+
+  }
+
   const handleComplete = (e) =>{
-    setIsInCooldown(false);
     setIsResendClick(false);
     setDisableBtn(false);
+    
   }
+
 
   // const renderer = ({minutes, seconds, completed }) => {
 
@@ -220,8 +263,9 @@ const SignUpPage = (props) => {
 
 
   const history = useHistory();
-  const {isAuthenticated} = props;
-
+  const {isAuthenticated,isConfirmed,error} = props;
+console.log(isAuthenticated);
+console.log(isConfirmed);
   return (
     <div >
      
@@ -254,7 +298,6 @@ const SignUpPage = (props) => {
                  variant="outlined"  
                   margin='dense' 
                   fullWidth
-                  onSubmit={handleSubmit}
                   >
                 <Box mt={2}>
                   <TextField
@@ -371,11 +414,14 @@ const SignUpPage = (props) => {
 
           //  the user hits join now button with no error, now user will have to input the secret code.  
               :
+
+          
       
               <Grid container 
               className={classes.signUpContainer}
               direction='column'
               >
+              
                  <Grid item >
                     <Typography variant='h4'>
                        <Box letterSpacing={2}>
@@ -423,23 +469,19 @@ const SignUpPage = (props) => {
                       >
                       <Typography variant='subtitle1' >
                           { isResendClick?
-                          <Countdown
-                            date={Date.now() + 600000}
-                            onComplete={handleComplete}
-                            renderer={renderer}
-                          />
-                               
+                          <span>{counter}</span>
                        :<Typography> Resend Code  </Typography>
+                       
                        }
                      
                       </Typography>
                   </Button>
                 </Box>
 
-                <Typography variant='caption'>The comfirmation code will be expired in 10 minutes</Typography>
+                <Typography variant='caption'>The comfirmation code will be expired in 5 minutes</Typography>
            
                 <Button className={classes.joinButton}
-                 onClick={handleResend}
+                 onClick={handleSent}
                  >
                   <Typography variant='h6'>
                     Enter
@@ -447,7 +489,29 @@ const SignUpPage = (props) => {
                 </Button>
                 </FormControl>
               
-              
+                  {/* when user is comfirmed. displays a message and redirect the user to main
+                  page in 3 sec */}
+
+                    
+
+                  {
+                 //*****ERRROR, IS CONFIRMED NEVER UPDATE,CHECK CONFIRM IN REDUCER. PLEASE FIX 2/1/2021 */
+                    isConfirmed?
+                    <Alert severity="success">
+                      The comfirmation code is correct, you will be redirect to main page in 3 second
+                      { setTimeout(()=>history.push("/", { from: "signUp" }), 3000 )}
+                      </Alert>
+                      
+                   :null
+                  }
+
+                  {
+                    error.msg.msg?
+                    <Alert severity="warning">
+                    {error.msg.msg}
+                   </Alert>
+                   :null
+                  }
              
 
 
@@ -473,4 +537,4 @@ const mapStateToProps = state  =>({
 });
 
 
-export default connect(mapStateToProps,{register,clearErrors,resend})(SignUpPage); //,login
+export default connect(mapStateToProps,{register,clearErrors,resend,confirm})(SignUpPage); //,login

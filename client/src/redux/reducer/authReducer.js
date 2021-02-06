@@ -18,7 +18,7 @@ import {
       isAuthenticated: null,
       isLoading: false,
       user: null,
-      isConfirm:false,
+      isConfirmed:false,
       isResend:false,
       isInCooldown:false,
     };
@@ -64,6 +64,11 @@ import {
               isResend:true,
               isInCooldown:true,
             }
+          case CONFIRMATION_SUCCESS:
+             return{
+               ...state,
+               isConfirmed:true,
+             }
           // case CONFIRMATION_FAIL:{
 
           // }

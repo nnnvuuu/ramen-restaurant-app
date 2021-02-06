@@ -25,7 +25,7 @@ const userSchema = new Schema({
   },
   secretCode:{
     type: Number,
-    expires:600, //10 min
+    expires:300, //5 min
 
   }
 

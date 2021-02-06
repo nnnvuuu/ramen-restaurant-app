@@ -13,7 +13,9 @@ const templates = require('../email/email.templates')
 
 router.post("/register", async(req,res)=> { 
 
-  const { email, password, passwordCheck, username } = req.body;
+  const { email, password, passwordCheck, username,secretCode } = req.body;
+
+
 
   try {
     // Simple validation
@@ -66,7 +68,7 @@ router.post("/register", async(req,res)=> {
       const hash = await bcrypt.hash(password, salt);
       if (!hash) throw Error('Something went wrong hashing the password');
 
-      const SecretCode = Math.floor(100000 + Math.random() * 900000);
+
 
   
       const newUser = new User({
@@ -74,7 +76,7 @@ router.post("/register", async(req,res)=> {
         email,
         password: hash,
         isConfirmed:false,
-        SecretCode:SecretCode,
+        secretCode:secretCode,
       });
 
 
@@ -93,12 +95,14 @@ router.post("/register", async(req,res)=> {
           id: savedUser.id,
           username: savedUser.username,
           email: savedUser.email,
-          isConfirmed:savedUser.isConfirmed
+          isConfirmed:savedUser.isConfirmed,
+          secretCode:savedUser.secretCode,
+          
         }
       });
 
 
-      sendEmail(email,  templates.emailContent(SecretCode));
+      sendEmail(email,  templates.emailContent(secretCode));
 
   
 
@@ -113,22 +117,34 @@ router.post("/register", async(req,res)=> {
   //confirm the secret code is same with the user input code
 
   router.post('/confirm',async(req,res)=>{
-    const { userID,inputSecretCode } = req.body;
-    const existingUser = await User.findById(userID);
-    console.log(existingUser);
+    const { secretCode,email } = req.body;
+    let existingUser = await User.findOne({email:email});
+   
+   try{
     if(existingUser){
-        if(existingUser.secretCode != inputSecretCode){
-          return res.status(400).json({ msg: 'the code is not correct' });
+     
+        if(existingUser.secretCode != secretCode){
+         
+          return res.status(400).json({ msg: 'The code is not correct' });
         }
         else{
-            existingUser.isConfirmed = true;
-            existingUser.secretCode = null;
+           const filter = { email: email };
+           const update = { 
+             secretCode:null,
+             isConfirmed:true
+             };
+            existingUser = await User.findOneAndUpdate(filter,update);
+           
         }
     }
 
-    else{
-      return res.status(400).json({msg:'the user does not exist' });
-    }
+    // else{
+    //   return res.status(400).json({msg:'The user does not exist' });
+    // }
+  }
+  catch (e) {
+    res.status(400).json({ msg: e.message });
+  }
 
   })
 
@@ -136,7 +152,7 @@ router.post("/register", async(req,res)=> {
   //updated the user secret code field when user click on re-send code button.
 
   router.post('/reSendCode',async(req,res)=>{
-    const { userID,resendCode } = req.body;
+    const { email,resendCode } = req.body;
     const existingUser = await User.findById(userID);
     // const updatedUser = await User.findOneAndUpdate({secretCode});
 

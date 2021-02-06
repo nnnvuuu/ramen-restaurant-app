@@ -42,7 +42,7 @@ export const loadUser = () => (dispatch,getState) => {
 
 
 //Register User
-export const register = ({username,email,password,passwordCheck}) => dispatch =>{
+export const register = ({username,email,password,passwordCheck,secretCode}) => dispatch =>{
 
 
   //Headers
@@ -54,7 +54,7 @@ export const register = ({username,email,password,passwordCheck}) => dispatch =>
 
   //Request body
 
-  const body = JSON.stringify({username,email,password,passwordCheck});
+  const body = JSON.stringify({username,email,password,passwordCheck,secretCode});
   axios.post('http://localhost:5000/user/register',body,config)
   .then(res => dispatch({
     type: REGISTER_SUCCESS,
@@ -99,8 +99,8 @@ export const login = ({username,password}) => dispatch =>{
 }
 
 
-export const resend = ({resendCode}) => dispatch =>{
-  const body = JSON.stringify({resendCode});
+export const resend = ({email,resendCode}) => dispatch =>{
+  const body = JSON.stringify({email,resendCode});
   // console.log(username);
   axios.post('http://localhost:5000/user/reSendCode',body)//<--
   .then(res => dispatch({
@@ -117,10 +117,19 @@ export const resend = ({resendCode}) => dispatch =>{
 
 
 
-export const confirm = ({resendCode}) => dispatch =>{
-  const body = JSON.stringify({resendCode});
-  // console.log(username);
-  axios.post('http://localhost:5000/user/confirm',body)//<--
+export const confirm = ({secretCode,email}) => dispatch =>{
+ 
+ 
+    //Headers
+    const config = {
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const body = JSON.stringify({secretCode,email});
+
+  axios.post('http://localhost:5000/user/confirm',body,config)//<--
   .then(res => dispatch({
     type: CONFIRMATION_SUCCESS,
     payload: res.data 
@@ -128,9 +137,11 @@ export const confirm = ({resendCode}) => dispatch =>{
   .catch(err => {
     dispatch(returnErrors(err.response.data, err.response.status,'CONFIRMATION_FAIL'));
     dispatch({
-      type: CONFIRMATION_FAIL,
+      type: CONFIRMATION_FAIL
     });
   });
+
+  
 }
 
 

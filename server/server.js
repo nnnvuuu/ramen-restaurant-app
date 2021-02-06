@@ -40,6 +40,7 @@ connection.once('open', ()=>{
   console.log('MongoDB database connection estabilished successfully');
 })
 
+mongoose.set('useFindAndModify', false);
 
 // const articlesRouter = require('./routes/articles');
 const userRouter = require('./routes/user');
