@@ -7,7 +7,8 @@ var validator = require("email-validator");
 const JWT_SECRET = process.env.JWT_SECRET;
 const sendEmail = require('../email/email.send')
 const msgs = require('../email/email.msgs')
-const templates = require('../email/email.templates')
+const templates = require('../email/email.templates');
+const e = require('express');
 // var passport = require('passport')
 // var LocalStrategy = require('passport-local').Strategy;
 
@@ -116,7 +117,7 @@ router.post("/register", async(req,res)=> {
 
   //confirm the secret code is same with the user input code
 
-  router.post('/confirm',async(req,res)=>{
+  router.post("/confirm",async(req,res)=>{
     const { secretCode,email } = req.body;
     let existingUser = await User.findOne({email:email});
    
@@ -138,9 +139,22 @@ router.post("/register", async(req,res)=> {
         }
     }
 
-    // else{
-    //   return res.status(400).json({msg:'The user does not exist' });
-    // }
+    //in ordeer for confirmation success works, gotta do the following res.json shts
+    const token = jwt.sign({ id: existingUser._id }, JWT_SECRET, { expiresIn: 10000 });
+    if (!token) throw Error('Couldnt sign the token');
+    
+
+    res.status(200).json({
+      token,
+      user: {
+        id: existingUser.id,
+        username: existingUser.username,
+        email: existingUser.email,
+        isConfirmed:existingUser.isConfirmed,
+        secretCode:existingUser.secretCode,
+        
+      }
+    });
   }
   catch (e) {
     res.status(400).json({ msg: e.message });
@@ -214,6 +228,33 @@ router.post("/register", async(req,res)=> {
 
       
   });
+
+
+
+  router.post('/forgotUsername',async(req,res)=>{
+    const { email } = req.body;
+    const user = await User.findOne({ email:email });
+    try{
+      if(!user)  return res.status(400).json({msg:'the user does not exist' });
+      //else send the name to user
+      else{
+        
+      }
+    }
+    catch(e){
+      res.status(400).json({msg:e.message})
+    }
+
+  }
+  )
+
+
+
+  router.post('/forgotPassword',async(req,res)=>{
+
+      
+  }
+  )
   
 
 

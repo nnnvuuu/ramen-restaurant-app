@@ -65,6 +65,7 @@ import {
               isInCooldown:true,
             }
           case CONFIRMATION_SUCCESS:
+            localStorage.setItem('token',action.payload.token);
              return{
                ...state,
                isConfirmed:true,

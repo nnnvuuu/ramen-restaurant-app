@@ -15,6 +15,7 @@ import {register,resend,confirm} from '../../redux/actions/authAction';
 import {clearErrors} from '../../redux/actions/errorAction';
 import moment from 'moment';
 import Counter from 'react-number-counter'
+import AuthPage from './AuthPage';
 
 
 
@@ -107,9 +108,6 @@ const useStyles = makeStyles((theme)=>({
 }))
 
 
-const authSection = (props) => {
-    
-}
 
 const SignUpPage = (props) => {
   const classes = useStyles();
@@ -119,23 +117,14 @@ const SignUpPage = (props) => {
   const [passwordCheck,setPasswordCheck] = useState('');
   const [errMsg,setErrMsg] = useState(null);
   const [secretCode,setSecretCode] = useState(null);
-  const [isResendClick,setIsResendClick] = useState(true);
+  const [isResendClick,setIsResendClick] = useState(false);
   const [isComplete,setIsComplete] = useState(false);
-  const [disableBtn,setDisableBtn] = useState(true);
+  const [disableBtn,setDisableBtn] = useState(false);
   const [counter, setCounter] =useState(300);
   const [secToMinute,setSecToMinute] = useState('');
 
 
-  // useEffect(() => {
-    
-  
-  //   counter > 0 && setTimeout(()=> setCounter(counter - 1), 1000);
-  
-  //   if(counter==0) return handleComplete();
- 
-  // }, [counter]);
 
- 
 
 
 
@@ -198,74 +187,15 @@ const SignUpPage = (props) => {
     props.register(newUser);
     // props.resend()
     
-    // if(props.isAuthenticated) 
-      //  history.push("/NotifyEmailConfirm", { from: "signUp" });
-
-      if(props.isAuthenticated){
-        props.clearErrors();
-      
-     }
-
-     
+    // if(props.isConfirmed) 
+    //    history.push("/NotifyEmailConfirm", { from: "signUp" });
+ 
   }
-
-  const handleResend = (e) =>{
-    e.preventDefault();
-    setIsResendClick(true);
-    setDisableBtn(true);
-    setCounter(300);
-    // const resendCode = Math.floor(100000 + Math.random() * 900000);
-    // props.resend(resendCode);
-  }
-
-  const handleSent = (e) =>{
-    e.preventDefault();
-    const inputCode = {secretCode,email}
-    props.confirm(inputCode);
-
-  }
-
-  const handleComplete = (e) =>{
-    setIsResendClick(false);
-    setDisableBtn(false);
-    
-  }
-
-
-  // const renderer = ({minutes, seconds, completed }) => {
-
-  //   console.log(completed);
-  //   if (completed) {
-  //     // Render a completed state
-  //     setIsInCooldown(false);
-  //     setIsResendClick(false);
-  //   } else {
-  //     // Render a countdown
-  //     setIsInCooldown(true);
-  //     // 
-  //     console.log("mo");
-  //     return <span>{minutes}:{seconds}</span>;
-  //   }
-
-  
-  // };
-
-
-    const renderer = ({minutes, seconds }) => {
-      if(minutes == 0){
-        return <span>{seconds}</span>
-      }
-      else{
-      return <span>{minutes}:{seconds}</span>;
-      }
-  };
 
 
 
   const history = useHistory();
   const {isAuthenticated,isConfirmed,error} = props;
-console.log(isAuthenticated);
-console.log(isConfirmed);
   return (
     <div >
      
@@ -414,108 +344,12 @@ console.log(isConfirmed);
 
           //  the user hits join now button with no error, now user will have to input the secret code.  
               :
-
-          
-      
-              <Grid container 
-              className={classes.signUpContainer}
-              direction='column'
-              >
               
-                 <Grid item >
-                    <Typography variant='h4'>
-                       <Box letterSpacing={2}>
-                         Sign up for account 
-                       </Box>
-                    </Typography>
-                 </Grid>
-                 <Grid item>
-                     <Typography variant='inherit'>
-                         <Box letterSpacing={2} mt={1}>
-                            nnn-ramen, All about delicious
-                         </Box>
-                      </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Box mt={5}>
-                  <p>We have sent a confirmation code to your email address. please enter the code below</p>
-                   </Box>
-                  </Grid>
-                  <FormControl 
-                 variant="outlined"  
-                  margin='dense' 
-                  fullWidth
-                  onSubmit={handleSubmit}
-                  >
-                
-                <Box >
-                  <TextField
-                        id="outlined-secretCode-input"
-                        label="Confirmation code"
-                        type="secretCode"
-                        name="secretCode"
-                        autoComplete="current-secretCode"
-                        variant="outlined"
-                        // fullWidth
-                        className={classes.codeTextField}
-                        onChange={handleChange}
-                     
-                    />
-                    <Button 
-                    className={isResendClick?classes.disableResendBtn
-                      :classes.resendBtn} 
-                      disabled = {disableBtn}
-                      onClick={handleResend}
-                      >
-                      <Typography variant='subtitle1' >
-                          { isResendClick?
-                          <span>{counter}</span>
-                       :<Typography> Resend Code  </Typography>
-                       
-                       }
-                     
-                      </Typography>
-                  </Button>
-                </Box>
 
-                <Typography variant='caption'>The comfirmation code will be expired in 5 minutes</Typography>
-           
-                <Button className={classes.joinButton}
-                 onClick={handleSent}
-                 >
-                  <Typography variant='h6'>
-                    Enter
-                  </Typography>
-                </Button>
-                </FormControl>
-              
-                  {/* when user is comfirmed. displays a message and redirect the user to main
-                  page in 3 sec */}
 
-                    
-
-                  {
-                 //*****ERRROR, IS CONFIRMED NEVER UPDATE,CHECK CONFIRM IN REDUCER. PLEASE FIX 2/1/2021 */
-                    isConfirmed?
-                    <Alert severity="success">
-                      The comfirmation code is correct, you will be redirect to main page in 3 second
-                      { setTimeout(()=>history.push("/", { from: "signUp" }), 3000 )}
-                      </Alert>
-                      
-                   :null
-                  }
-
-                  {
-                    error.msg.msg?
-                    <Alert severity="warning">
-                    {error.msg.msg}
-                   </Alert>
-                   :null
-                  }
+               <AuthPage email={email}/>
              
-
-
-                </Grid>
+              
             
               } 
       </Paper>

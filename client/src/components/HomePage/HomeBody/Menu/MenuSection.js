@@ -25,7 +25,7 @@ function MenuSection() {
              MENU メニュー
           </Typography>
       </div>
-    <Grid
+    {/* <Grid
     container
      direction="row"
     // justify="flex-start"
@@ -96,7 +96,7 @@ function MenuSection() {
      
 
       
-    </Grid>
+    </Grid> */}
 
     </div>
   );
