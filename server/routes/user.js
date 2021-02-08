@@ -238,7 +238,8 @@ router.post("/register", async(req,res)=> {
       if(!user)  return res.status(400).json({msg:'the user does not exist' });
       //else send the name to user
       else{
-        
+        console.log(user.username);
+        sendEmail(email,  templates.forgotUsername(user.username));
       }
     }
     catch(e){
@@ -251,7 +252,21 @@ router.post("/register", async(req,res)=> {
 
 
   router.post('/forgotPassword',async(req,res)=>{
-
+    const { username } = req.body;
+    const user = await User.findOne({username:username});
+    
+ 
+    try{
+      if(!user)  return res.status(400).json({msg:'the user does not exist' });
+      //else send the name to user
+      else{
+        // console.log(user._id);
+        sendEmail(user.email,  templates.forgotPassword(user._id));
+      }
+    }
+    catch(e){
+      res.status(400).json({msg:e.message})
+    }
       
   }
   )

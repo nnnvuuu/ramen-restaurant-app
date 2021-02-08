@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Typography, makeStyles, FormControl, TextField,Button,Grid } from '@material-ui/core';
-
+import axios from 'axios';
 const useStyles = makeStyles(()=>({
     root:{
       paddingTop:'20px',
@@ -41,7 +41,34 @@ const useStyles = makeStyles(()=>({
 }))
 
 const ForgotEmail = () => {
+
+const [email,setEmail] = useState('');
+
+const handleChange = (e) => {
+  e.preventDefault();
+  setEmail(e.target.value);
+ 
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const user = {email:email}
+
+  axios.post('http://localhost:5000/user/forgotUsername',user)
+  .then(res=>{
+    console.log(res.data);
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
+
+}
+
+
+
   const classes = useStyles();
+  
   return (
     <div className={classes.root}>
       <Typography variant='h3' className={classes.title}>
@@ -64,8 +91,10 @@ const ForgotEmail = () => {
        type="email"
        autoComplete="current-email"
        variant="outlined" 
+       name ="email"
+        onChange = {handleChange}
         />
-      <Button className={classes.button}>
+      <Button className={classes.button} onClick = {handleSubmit}>
         Send Email
       </Button>
 

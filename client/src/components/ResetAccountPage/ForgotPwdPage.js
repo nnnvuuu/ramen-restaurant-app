@@ -1,7 +1,7 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Typography, makeStyles, FormControl, TextField,Button,Grid,Box} from '@material-ui/core';
 import {Link} from 'react-router-dom';
-
+import axios from 'axios';
 const useStyles = makeStyles(()=>({
   root:{
     paddingTop:'20px',
@@ -42,6 +42,29 @@ const useStyles = makeStyles(()=>({
 }))
 
 const ForgotPwdPage = () => {
+  const [username,setUsername] = useState('');
+
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setUsername(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const user = {username:username};
+
+    axios.post('http://localhost:5000/user/forgotPassword',user)
+    .then(res=>{
+      console.log(res.data);
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+  }
+
+
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -63,8 +86,10 @@ const ForgotPwdPage = () => {
        type="username"
        autoComplete="current-username"
        variant="outlined" 
+       name= "username"
+       onChange={handleChange}
         />
-      <Button className={classes.button}>
+      <Button className={classes.button} onClick = {handleSubmit}>
         Submit
       </Button>
 

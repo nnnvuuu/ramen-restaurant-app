@@ -1,17 +1,30 @@
-module.exports = {
+// module.exports = {
 
-    confirm: id => ({
-      subject: 'React Confirm Email',
-      html: `
-        <a href='${CLIENT_ORIGIN}/confirm/${id}'>
-          click to confirm email
-        </a>
-      `,      
-      text: `Copy and paste this link: ${CLIENT_ORIGIN}/confirm/${id}`
-    })
+//   forgotUsername: username => ({
+//       subject: 'nnn-ramen username',
+//       html: `
+//         <a href='${CLIENT_ORIGIN}/confirm/${id}'>
+//           click to confirm email
+//         </a>
+//       `,      
+//       text: `Copy and paste this link: ${CLIENT_ORIGIN}/confirm/${username}`
+//     })
     
-  }
+//   }
 
+// module.exports = {
+
+//   forgotUsername: username => ({
+//       subject: 'nnn-ramen username',
+//       html: `
+//         <p>
+//           Your username is ${username}.
+//         </p>
+//       `,      
+  
+//     })
+    
+//   }
  
 
   module.exports = {
@@ -29,6 +42,28 @@ module.exports = {
 //      `
     //   text: `Copy and paste this link:`  //you can put link here
         text: `the verification code is ${SecretCode}\n the code will be expired in 10 minute.` //you can put link here
+    }),
+
+
+    forgotUsername: username => ({
+      subject: 'nnn-ramen username',
+      html: `
+        <p>
+          Your username is ${username}.
+        </p>
+      `,      
+  
+    }),
+
+
+    forgotPassword: id => ({
+      subject: 'nnn-ramen password reset',
+      html: `
+      <a href='http://localhost:5000/user/resetPassword/${id}'>
+          click the link to reset your password.
+       </a>
+      `,      
+  
     })
     
   }
