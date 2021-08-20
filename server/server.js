@@ -21,11 +21,14 @@ var con = mysql.createConnection({
  
 //   mysql://bb00df426a5f4a:430ef33e@us-cdbr-east-04.cleardb.com/heroku_01f1d3d78ee004b?reconnect=true
 
-
+con.connect((err) =>{
+    if(err) throw err;
+    console.log("MYSQL connected...");
+})
 
 
 const app = express();
-const port = process.env.PORT || 3306;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());

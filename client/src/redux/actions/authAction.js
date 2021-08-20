@@ -55,7 +55,7 @@ export const register = ({username,email,password,passwordCheck,secretCode}) => 
   //Request body
 
   const body = JSON.stringify({username,email,password,passwordCheck,secretCode});
-  axios.post('http://localhost:5000/user/register',body,config)
+  axios.post('http://ramen-restaurant.herokuapp.com/user/register',body,config)
   .then(res => dispatch({
     type: REGISTER_SUCCESS,
     payload: res.data 
