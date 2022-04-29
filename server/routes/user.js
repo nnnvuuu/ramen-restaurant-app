@@ -303,29 +303,14 @@ const sendEmail = require('../email/email.send')
 const msgs = require('../email/email.msgs')
 const templates = require('../email/email.templates');
 const e = require('express');
-var mysql = require('mysql');
-
-
 // var passport = require('passport')
 // var LocalStrategy = require('passport-local').Strategy;
-
-
-const db = mysql.createPool({
-  host: "us-cdbr-east-04.cleardb.com",
-  user: "bb00df426a5f4a",
-  password: "430ef33e",
-  database:"heroku_01f1d3d78ee004b",
-});
-
-
-
 
 router.post("/register", async(req,res)=> { 
 
   const { email, password, passwordCheck, username,secretCode } = req.body;
 
-  const sqlInsert = "INSERT INTO users (email, username, password, pwdResetCode) VALUES (?,?,?,?)";
-  
+
 
   try {
     // Simple validation
@@ -356,18 +341,18 @@ router.post("/register", async(req,res)=> {
     }
   
      // Check for existing user
-    //  const existingUser = await User.findOne({ email:email });
-    //  if (existingUser){
-    //   return res.status(400).json({ msg: 'An account with this email address already exist'});
-    //  }
+     const existingUser = await User.findOne({ email:email });
+     if (existingUser){
+      return res.status(400).json({ msg: 'An account with this email address already exist'});
+     }
    
      
   
       // Check for existing username
-      // const existingUsername = await User.findOne({ username:username });
-      // if (existingUsername){
-      //  return res.status(400).json({ msg: 'the username has already been used'});
-      // }
+      const existingUsername = await User.findOne({ username:username });
+      if (existingUsername){
+       return res.status(400).json({ msg: 'the username has already been used'});
+      }
 
       
   
@@ -380,23 +365,20 @@ router.post("/register", async(req,res)=> {
 
 
 
-   //Create user
-      // const newUser = new User({
-      //   username,
-      //   email,
-      //   password: hash,
-      //   isConfirmed:false,
-      //   secretCode:secretCode,
-      // });
-
-      db.query(sqlInsert[email,username,hash,secretCode], (err, result) =>{
-          if(err) throw err;
-          console.log("new user added");
-      })
-      
   
-      // const savedUser = await newUser.save();
-      // if (!savedUser) throw Error('Something went wrong saving the user');
+      const newUser = new User({
+        username,
+        email,
+        password: hash,
+        isConfirmed:false,
+        secretCode:secretCode,
+      });
+
+
+    
+  
+      const savedUser = await newUser.save();
+      if (!savedUser) throw Error('Something went wrong saving the user');
   
       const token = jwt.sign({ id: savedUser._id }, JWT_SECRET, {
         expiresIn: 10000
