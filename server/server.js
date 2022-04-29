@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require("path");
-var mysql = require('mysql');
 require('dotenv').config();
 
 // var session = require("express-session")
@@ -12,24 +11,36 @@ require('dotenv').config();
 //Passport config
 // require('./config/passport')(passport);
 
-var con = mysql.createConnection({
-    host: "us-cdbr-east-04.cleardb.com",
-    user: "bb00df426a5f4a",
-    password: "430ef33e",
-    database:"heroku_01f1d3d78ee004b",
-  });
- 
-//   mysql://bb00df426a5f4a:430ef33e@us-cdbr-east-04.cleardb.com/heroku_01f1d3d78ee004b?reconnect=true
-
-
-
 
 const app = express();
-const port = process.env.PORT || 3306;
+const port = process.env.PORT || 5000;
+
+const uri = process.env.ATLAS_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(cors());
 app.use(express.json());
 
+// app.use(express.static("public"));
+
+
+// Express Session
+// app.use(session({ secret: JWT_SECRET,resave:true,saveUninitialized:true}));
+
+// // BodyParser
+// app.use(bodyParser.urlencoded({ extended: false }));
+
+// //passport middleware
+// app.use(passport.initialize());
+// app.use(passport.session());
+ 
+mongoose.connect(uri,{ useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology: true }  );
+const connection = mongoose.connection;
+connection.once('open', ()=>{
+  console.log('MongoDB database connection estabilished successfully');
+})
+
+mongoose.set('useFindAndModify', false);
 
 // const articlesRouter = require('./routes/articles');
 const userRouter = require('./routes/user');
