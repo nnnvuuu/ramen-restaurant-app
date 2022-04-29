@@ -1,0 +1,47 @@
+{
+  "name": "ramen-restaurant-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "install-server": "npm install",
+    "heroku-postbuild": "npm run install-client && npm run install-server && npm run build ",
+    "start": "node server/server.js",
+    "client": "cd client && npm start"
+  },
+  "engines": {
+    "node": "12.13.0",
+    "npm": "6.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nnnvuuu/ramen-restaurant-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nnnvuuu/ramen-restaurant-app/issues"
+  },
+  "homepage": "https://github.com/nnnvuuu/ramen-restaurant-app#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "email-validator": "^2.0.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.13",
+    "nodemailer": "^6.4.17",
+    "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "react-js-pagination": "^3.0.3"
+  },
+  "proxy": "http://localhost:5000"
+}

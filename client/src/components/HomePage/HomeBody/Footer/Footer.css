@@ -1,0 +1,82 @@
+
+
+
+
+
+@media only screen and (min-width:300px ) {
+ 
+    .footer-container{
+        background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+        height: 15vh;
+       }
+       .footer-items{
+           color: #ffffff;
+           text-align: center;
+           font-size: 3rem;
+           letter-spacing: 3px;
+           font-family: 'Times New Roman', Times, serif;
+           font-style: italic;
+       }
+        .footer-serious-part{
+            color: #ffffff;
+            text-align: center;
+            font-size: 0/8rem;
+            /* font-family: 'Times New Roman', Times, serif; */
+         
+        }
+  }
+  
+  
+  
+  @media only screen and (min-width:600px ) {
+   
+    .footer-container{
+        background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+        height: 15vh;
+       }
+       .footer-items{
+           color: #ffffff;
+           text-align: center;
+           font-size: 4rem;
+           letter-spacing: 3px;
+           font-family: 'Times New Roman', Times, serif;
+           font-style: italic;
+       }
+        .footer-serious-part{
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.2rem;
+            /* font-family: 'Times New Roman', Times, serif; */
+         
+        }
+    
+  }
+  
+  @media only screen and (min-width: 960px) {
+   
+      
+  }
+  
+  @media only screen and (min-width: 1280px) {
+   .footer-container{
+    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    height: 18vh;
+   }
+   .footer-items{
+       color: #ffffff;
+       text-align: center;
+       font-size: 4rem;
+       letter-spacing: 3px;
+       font-family: 'Times New Roman', Times, serif;
+       font-style: italic;
+   }
+    .footer-serious-part{
+        color: #ffffff;
+        text-align: center;
+        font-size: 1.2rem;
+        /* font-family: 'Times New Roman', Times, serif; */
+     
+    }
+  }
+  
+  
